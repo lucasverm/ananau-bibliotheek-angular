@@ -1,1 +1,34 @@
 <app-topbar></app-topbar>
+<div class="row">
+  <div class="offset-4 col-4">
+    <h1 class="text-center">Login</h1>
+    <!---------------------------------------------------------
+    ***********************************************************
+    ********************** ERRORS *****************************
+    ***********************************************************
+    ---------------------------------------------------------->
+    <div class="alert alert-danger" role="alert" [hidden]="!((loginFormulier.get('email')['errors'] && loginFormulier.get('email').touched ) || 
+    (loginFormulier.get('password')['errors'] && loginFormulier.get('password').touched))
+    ">
+      <p class="marginBottom0" *ngIf="loginFormulier.get('email')['errors'] && loginFormulier.get('email').touched">
+        {{ getErrorMessage(loginFormulier.get('email')['errors'], 'Emailadres') }}
+      </p>
+      <p class="marginBottom0" *ngIf="loginFormulier.get('password')['errors'] && loginFormulier.get('password').touched ">
+        {{ getErrorMessage(loginFormulier.get('password')['errors'], 'Passwoord') }}
+      </p>
+    </div>
+    <!---------------------------------------------------------
+    ***********************************************************
+    ********************* FORMULIER ***************************
+    ***********************************************************
+    ---------------------------------------------------------->
+    <form [formGroup]="loginFormulier" (ngSubmit)='logGebruikerIn()'>
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" id="email" formControlName="email">
+      <label for="password" class="marginTop10">Password</label>
+      <input type="password" class="form-control" id="password" formControlName="password">
+      <button type="submit" class="btn btn-primary col-12 marginTop10" [disabled]='!loginFormulier.valid'>Login</button>
+    </form>
+
+  </div>
+</div>
