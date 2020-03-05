@@ -3,6 +3,7 @@
 .btn-primary,
 .btn-primary:active,
 .btn-primary:visited {
+  border: none !important;
   background-color: #0f754e !important;
 }
 
@@ -11,6 +12,10 @@
   color: black;
 }
 
-.btn-primary {
-  border: none !important;
+.marginTop10 {
+  margin-top: 10px;
+}
+
+.marginBottom0 {
+  margin-bottom: 0px !important;
 }

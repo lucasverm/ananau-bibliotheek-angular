@@ -1,0 +1,33 @@
+<app-topbar></app-topbar>
+<div class="row">
+  <div class="offset-3 col-6">
+    <h1 class="text-center">Wachtwoord vergeten</h1>
+    <!---------------------------------------------------------
+    ***********************************************************
+    ********************** ERRORS *****************************
+    ***********************************************************
+    ---------------------------------------------------------->
+
+    <!---------------------------------------------------------
+    ***********************************************************
+    ********************* FORMULIER ***************************
+    ***********************************************************
+    ---------------------------------------------------------->
+    <form [formGroup]="wachtwoordVergetenFormulier" (ngSubmit)='verzendEmail()' class="row">
+      <div class="offset-3 col-6">
+        <div class="alert alert-danger" role="alert"
+          *ngIf="wachtwoordVergetenFormulier.get('email')['errors'] && wachtwoordVergetenFormulier.get('email').touched">
+          <p class="marginBottom0">
+            {{ getErrorMessage(wachtwoordVergetenFormulier.get('email')['errors']) }}
+          </p>
+        </div>
+        <label for="email">Geef uw emailadres in</label>
+        <input type="email" class="form-control" id="email" formControlName="email">
+        <button type="submit" class="btn btn-primary col-12 marginTop10"
+          [disabled]='!wachtwoordVergetenFormulier.valid'>Email
+          versturen</button>
+      </div>
+    </form>
+
+  </div>
+</div>
