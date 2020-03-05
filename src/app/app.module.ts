@@ -7,13 +7,17 @@ import { LoginComponent } from './login/login.component';
 import { TopbarComponent } from './topbar/topbar.component';
 import { LanguageComponent } from './language/language.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RegistreerComponent } from './registreer/registreer.component';
+import { WachtwoordvergetenComponent } from './wachtwoordvergeten/wachtwoordvergeten.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     TopbarComponent,
-    LanguageComponent
+    LanguageComponent,
+    RegistreerComponent,
+    WachtwoordvergetenComponent
   ],
   imports: [
     BrowserModule,

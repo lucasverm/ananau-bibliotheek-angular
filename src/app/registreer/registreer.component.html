@@ -1,0 +1,56 @@
+<app-topbar></app-topbar>
+<div class="row">
+  <div class="offset-2 col-8">
+    <h1 class="text-center">Registreer</h1>
+    <!---------------------------------------------------------
+    ***********************************************************
+    ********************** ERRORS *****************************
+    ***********************************************************
+    ---------------------------------------------------------->
+    <div class="row">
+      <div class="offset-2 col-8">
+        <div class="alert alert-danger" role="alert" [hidden]="true">
+        </div>
+      </div>
+    </div>
+    <!---------------------------------------------------------
+    ***********************************************************
+    ********************* FORMULIER ***************************
+    ***********************************************************
+    ---------------------------------------------------------->
+    <form [formGroup]="registreerFormulier" class="row" (ngSubmit)='registreerNieuweGebruiker()'>
+      <div class="col-4">
+        <label for="voornaam" class="marginTop10">Voornaam</label>
+        <input type="text" class="form-control" id="voornaam" formControlName="voornaam">
+      </div>
+      <div class="col-4">
+        <label for="achternaam" class="marginTop10">Achternaam</label>
+        <input type="text" class="form-control" id="achternaam" formControlName="achternaam">
+      </div>
+      <div class="col-4">
+        <label for="telefoon" class="marginTop10">Telefoonnummer</label>
+        <input type="tel" class="form-control" id="telefoon" formControlName="telefoon">
+      </div>
+      <div class="col-6">
+        <label for="email" class="marginTop10">Emailadres</label>
+        <input type="email" class="form-control" id="email" formControlName="email">
+      </div>
+      <div class="col-6">
+        <label for="geboorteDatum" class="marginTop10">Geboorte datum</label>
+        <input type="date" class="form-control" id="geboorteDatum" formControlName="geboorteDatum">
+      </div>
+      <div class="col-6">
+        <label for="wachtwoord" class="marginTop10">Wachtwoord</label>
+        <input type="password" class="form-control" id="wachtwoord" formControlName="wachtwoord">
+      </div>
+      <div class="col-6">
+        <label for="herhaalWachtwoord" class="marginTop10">Herhaal wachtwoord</label>
+        <input type="password" class="form-control" id="herhaalWachtwoord" formControlName="herhaalWachtwoord">
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary col-12 marginTop10"
+          [disabled]='!registreerFormulier.valid'>Registreer als nieuwe gebruiker!</button>
+      </div>
+    </form>
+  </div>
+</div>

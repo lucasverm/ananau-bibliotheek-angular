@@ -15,12 +15,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.loginFormulier = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      wachtwoord: ['', Validators.required]
     })
   }
 
   logGebruikerIn() {
-    alert(this.loginFormulier.value.email + '' + this.loginFormulier.value.password);
+    alert(this.loginFormulier.value.email + '' + this.loginFormulier.value.wachtwoord);
   }
 
   getErrorMessage(errors: any, veldNaam: string): string {
