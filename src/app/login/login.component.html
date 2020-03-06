@@ -28,6 +28,7 @@
       <label for="wachtwoord" class="marginTop10">Wachtwoord</label>
       <input type="password" class="form-control" id="wachtwoord" formControlName="wachtwoord">
       <button type="submit" class="btn btn-primary col-12 marginTop10" [disabled]='!loginFormulier.valid'>Login</button>
+      <a [routerLink]="['/wachtwoordvergeten']" id="login">Wachtwoord vergeten?</a>
     </form>
 
   </div>
