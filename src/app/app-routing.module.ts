@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegistreerComponent } from './registreer/registreer.component';
 import { WachtwoordvergetenComponent } from './wachtwoordvergeten/wachtwoordvergeten.component';
+import { OverviewComponent } from './overview/overview.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
@@ -17,6 +19,11 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegistreerComponent,
+  },
+  {
+    path: 'overview',
+    component: OverviewComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: '',

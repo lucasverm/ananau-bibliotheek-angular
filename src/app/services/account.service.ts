@@ -9,7 +9,6 @@ import { map } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class AccountService {
-/*
     private readonly _tokenKey = 'currentUser';
     public user: BehaviorSubject<Gebruiker>;
     public huidigeGebruiker: Observable<Gebruiker>;
@@ -35,7 +34,7 @@ export class AccountService {
     public login(email: string, password: string): Observable<boolean> {
         return this.http
             .post(
-                `${environment.apiUrl}/account`,
+                `${environment.apiUrl}/Gebruiker`,
                 { email, password },
                 { responseType: 'text' }
             )
@@ -56,6 +55,7 @@ export class AccountService {
                 })
             );
     }
+
     get token(): string {
         const localToken = localStorage.getItem(this._tokenKey);
         return !!localToken ? localToken : '';
@@ -77,5 +77,4 @@ function parseJwt(token) {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     return JSON.parse(window.atob(base64));
-    */
 }

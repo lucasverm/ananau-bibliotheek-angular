@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -9,6 +9,7 @@ import { LanguageComponent } from './language/language.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegistreerComponent } from './registreer/registreer.component';
 import { WachtwoordvergetenComponent } from './wachtwoordvergeten/wachtwoordvergeten.component';
+import { OverviewComponent } from './overview/overview.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +18,14 @@ import { WachtwoordvergetenComponent } from './wachtwoordvergeten/wachtwoordverg
     TopbarComponent,
     LanguageComponent,
     RegistreerComponent,
-    WachtwoordvergetenComponent
+    WachtwoordvergetenComponent,
+    OverviewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
