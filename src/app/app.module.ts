@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegistreerComponent } from './registreer/registreer.component';
 import { WachtwoordvergetenComponent } from './wachtwoordvergeten/wachtwoordvergeten.component';
 import { OverviewComponent } from './overview/overview.component';
+import { httpInterceptorProviders } from './http-inceptors';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { OverviewComponent } from './overview/overview.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
