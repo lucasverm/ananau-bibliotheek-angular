@@ -3,6 +3,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { OntleenService } from '../services/ontleen.service';
 import { Item } from '../models/item';
 import { GebruikerItem } from '../models/gebruiker-item';
+import { AccountService } from '../services/account.service';
+import { Gebruiker } from '../models/gebruiker';
 
 @Component({
   selector: 'app-overview',
@@ -14,25 +16,68 @@ export class OverviewComponent implements OnInit {
   public loadingError: HttpErrorResponse;
   public loading: boolean;
   public ontleendeItems: GebruikerItem[];
+  public ontleendeHistorieItems: GebruikerItem[];
+  public ingelogdeGebruiker: Gebruiker;
+  public vanafOntleendeItems: number;
+  public hoeveelheidOntleendeItems: number;
+  public totaalOntleendeItems: number;
+  public vanafHistoriek: number;
+  public hoeveelheidHistoriek: number;
+  public totaalHistoriek: number;
 
-  constructor(private _ontleenService: OntleenService, ) {
-    this.geefOntleendeBoeken()
-   }
+  constructor(private _ontleenService: OntleenService, private _accountService: AccountService) {
+    this.vanafOntleendeItems = 0;
+    this.hoeveelheidOntleendeItems = 10;
+    this.geefOntleendeBoeken(this.vanafOntleendeItems, this.hoeveelheidOntleendeItems);
 
-  ngOnInit() {
+    this.vanafHistoriek = 0;
+    this.hoeveelheidHistoriek = 10;
+    this.geefHistorieOntleendeBoeken(this.vanafHistoriek, this.hoeveelheidHistoriek);
   }
 
-  geefOntleendeBoeken() {
+  ngOnInit() {
+    this._accountService.huidigeGebruiker.subscribe(val => {
+      this.ingelogdeGebruiker = val;
+    });
+  }
+
+  veranderOntleendeItemsScope(naar: number) {
+    this.vanafOntleendeItems += (naar * 10);
+    this.geefOntleendeBoeken(this.vanafOntleendeItems, this.hoeveelheidOntleendeItems);
+  }
+
+  veranderHistoriekScope(naar: number) {
+    this.vanafHistoriek += (naar * 10);
+    this.geefHistorieOntleendeBoeken(this.vanafHistoriek, this.hoeveelheidHistoriek);
+  }
+
+  geefOntleendeBoeken(vanaf: number, hoeveelheid: number) {
     this._ontleenService
-      .getOntleendeBoekenVanGebruiker()
+      .getOntleendeBoekenVanGebruiker$(vanaf, hoeveelheid)
       .subscribe(
         val => {
-          this.loading = true;
+          this.ontleendeItems = undefined;
           if (val) {
-            this.ontleendeItems = val;
-            console.log(this.ontleendeItems)
+            this.ontleendeItems = val["gebruikerItems"];
+            this.totaalOntleendeItems = val["totaal"];
           }
-          this.loading = false;
+        },
+        error => {
+          this.loadingError = error;
+        }
+      );
+  }
+
+  geefHistorieOntleendeBoeken(vanaf: number, hoeveelheid: number) {
+    this._ontleenService
+      .getOntleenHistorieVanGebruiker$(vanaf, hoeveelheid)
+      .subscribe(
+        val => {
+          this.ontleendeHistorieItems = undefined;
+          if (val) {
+            this.ontleendeHistorieItems = val["gebruikerItems"];
+            this.totaalHistoriek = val["totaal"];
+          }
         },
         error => {
           this.loadingError = error;

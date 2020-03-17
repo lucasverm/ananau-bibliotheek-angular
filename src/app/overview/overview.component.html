@@ -1,13 +1,44 @@
 <ng-container *ngIf="!loading; else loadingError">
+  <div class="row">
+    <div class="col-3">
+      <table class="table table-bordered">
+        <tr>
+          <td>Overview</td>
+        </tr>
+        <tr>
+          <td>Item scannen</td>
+        </tr>
+        <tr>
+          <td>Items beheren</td>
+        </tr>
+        <tr>
+          <td>Mijn account</td>
+        </tr>
 
-  <h1>overview!!</h1>
-  <table>
-    <tr></tr>
-  </table>
+      </table>
+    </div>
+    <div class="col-7">
+      <h1>Welkom, {{ingelogdeGebruiker.voornaam}} {{ingelogdeGebruiker.achternaam}}</h1>
+
+      <h2>Items in uw bezit:</h2>
+      <button *ngIf="totaalOntleendeItems > 10" [disabled]="vanafOntleendeItems <= 0" (click)="veranderOntleendeItemsScope(-1)">Minder</button>
+      <button *ngIf="totaalOntleendeItems > 10" [disabled]="totaalOntleendeItems < (vanafOntleendeItems + hoeveelheidOntleendeItems)" (click)="veranderOntleendeItemsScope(1)">Meer</button>
+      <app-uitgeleende-boeken-tabel [items]=ontleendeItems [startNummer]=vanafOntleendeItems></app-uitgeleende-boeken-tabel>
+      
+      <h2>Ontleen historie: </h2>
+      <button *ngIf="totaalHistoriek > 10" [disabled]="vanafHistoriek <= 0" (click)="veranderHistoriekScope(-1)">Minder</button>
+      <button *ngIf="totaalHistoriek > 10" [disabled]="totaalHistoriek < (vanafHistoriek + hoeveelheidHistoriek)" (click)="veranderHistoriekScope(1)">Meer</button>
+      <app-uitgeleende-boeken-tabel [items]=ontleendeHistorieItems [startNummer]=vanafHistoriek></app-uitgeleende-boeken-tabel>
+    </div>
+  </div>
 </ng-container>
 
 <ng-template #loadingError>
-  <div class="spinner-border spinner" role="status">
-    <span class="sr-only">Loading...</span>
+  <div class="row">
+    <div class="col-2 offset-5 text-center">
+      <div class="spinner-border spinner" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
   </div>
 </ng-template>

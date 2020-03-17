@@ -11,6 +11,8 @@ import { RegistreerComponent } from './registreer/registreer.component';
 import { WachtwoordvergetenComponent } from './wachtwoordvergeten/wachtwoordvergeten.component';
 import { OverviewComponent } from './overview/overview.component';
 import { httpInterceptorProviders } from './http-inceptors';
+import { UitgeleendeBoekenTabelComponent } from './uitgeleende-boeken-tabel/uitgeleende-boeken-tabel.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { httpInterceptorProviders } from './http-inceptors';
     LanguageComponent,
     RegistreerComponent,
     WachtwoordvergetenComponent,
-    OverviewComponent
+    OverviewComponent,
+    UitgeleendeBoekenTabelComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

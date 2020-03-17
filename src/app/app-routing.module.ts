@@ -5,6 +5,7 @@ import { RegistreerComponent } from './registreer/registreer.component';
 import { WachtwoordvergetenComponent } from './wachtwoordvergeten/wachtwoordvergeten.component';
 import { OverviewComponent } from './overview/overview.component';
 import { AuthGuard } from './guards/auth.guard';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
@@ -27,14 +28,13 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: LoginComponent,
+    redirectTo: 'overview',
+    pathMatch: "full"
   },
-
   {
     path: '**',
-    redirectTo: '',
-    pathMatch: 'full',
-  },
+    component: PageNotFoundComponent
+  }
 ];
 
 @NgModule({

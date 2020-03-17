@@ -1,3 +1,5 @@
+import { GebruikerItem } from './gebruiker-item';
+
 export class Gebruiker {
     id: string;
     voornaam: string;
@@ -7,4 +9,5 @@ export class Gebruiker {
     geboortedatum: Date
     foto: string;
     type: string;
+    gebruikertems: GebruikerItem[];
 }
