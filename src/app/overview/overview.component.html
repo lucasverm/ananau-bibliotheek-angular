@@ -1,21 +1,7 @@
 <ng-container *ngIf="!loading; else loadingError">
   <div class="row">
     <div class="col-3">
-      <table class="table table-bordered">
-        <tr>
-          <td>Overview</td>
-        </tr>
-        <tr>
-          <td>Item scannen</td>
-        </tr>
-        <tr>
-          <td>Items beheren</td>
-        </tr>
-        <tr>
-          <td>Mijn account</td>
-        </tr>
-
-      </table>
+      <app-sidemenu></app-sidemenu>
     </div>
     <div class="col-7">
       <h1>Welkom, {{ingelogdeGebruiker.voornaam}} {{ingelogdeGebruiker.achternaam}}</h1>

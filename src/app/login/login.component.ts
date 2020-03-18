@@ -14,10 +14,10 @@ export class LoginComponent implements OnInit {
   public errorMessage: string;
   public loginCredential: string;
   public password: string;
-
+  public loading: Boolean;
   public loginFormulier: FormGroup;
 
-  constructor(public router: Router, private fb: FormBuilder, private accountService: AccountService){}
+  constructor(public router: Router, private fb: FormBuilder, private accountService: AccountService) { }
 
   ngOnInit() {
     this.loginFormulier = this.fb.group({
@@ -33,36 +33,30 @@ export class LoginComponent implements OnInit {
       this.errorMessage = 'Gelieve een wachtwoord en/of gebruikersnaam in te vullen';
       return;
     }
-
     this.accountService.login(this.loginCredential, this.password).subscribe(
       value => {
+        this.loading = true;
         if (value) {
           if (this.accountService.redirectUrl) {
             this.router.navigateByUrl(this.accountService.redirectUrl);
             this.accountService.redirectUrl = undefined;
           } else {
             this.accountService.huidigeGebruiker.subscribe(val => {
-              /*if(val.type == "Cliënt")
-              this.router.navigate(['/picto-agenda']);   
-              else*/
               this.router.navigate(['/overview']);
             })
-           
+
           }
-        } else {
-          this.errorMessage = 'Could not login';
         }
+        this.loading = false;
       },
       (err: HttpErrorResponse) => {
         console.log(err);
         if (err.error instanceof Error) {
-          this.errorMessage = `Error while trying to login user ${
-            this.loginCredential
-          } `;
+          this.errorMessage = `${err.error} `;
+        } else if (err.error instanceof ProgressEvent) {
+          this.errorMessage = `${err.statusText} `;
         } else {
-          this.errorMessage = `Error ${err.status} while trying to login user ${
-            this.loginCredential
-          } `;
+          this.errorMessage = `${err.error} `;
         }
       }
     );
@@ -71,14 +65,14 @@ export class LoginComponent implements OnInit {
   getErrorMessage(errors: any, veldNaam: string): string {
     if (errors == null) {
       return;
-    
+
     } else if (errors.required) {
       return veldNaam + ' is verplicht';
-    
+
     } else if (errors.minlength) {
       return `needs at least ${errors.minlength.requiredLength} 
       characters (got ${errors.minlength.actualLength})`;
-    
+
     } else if (errors.email) {
       return `Dit is een ongeldig emailadres!`;
     }

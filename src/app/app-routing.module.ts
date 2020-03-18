@@ -6,7 +6,9 @@ import { WachtwoordvergetenComponent } from './wachtwoordvergeten/wachtwoordverg
 import { OverviewComponent } from './overview/overview.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
+import { ItemPageComponent } from './item-page/item-page.component';
+import { ItemResolver } from './resolvers/item.resolver';
+import { ScanItemComponent } from './scan-item/scan-item.component';
 
 const routes: Routes = [
   {
@@ -24,6 +26,17 @@ const routes: Routes = [
   {
     path: 'overview',
     component: OverviewComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "item/:id",
+    component: ItemPageComponent,
+    resolve: { item: ItemResolver },
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "scan",
+    component: ScanItemComponent,
     canActivate: [AuthGuard],
   },
   {

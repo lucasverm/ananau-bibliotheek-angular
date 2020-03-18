@@ -13,6 +13,12 @@ import { OverviewComponent } from './overview/overview.component';
 import { httpInterceptorProviders } from './http-inceptors';
 import { UitgeleendeBoekenTabelComponent } from './uitgeleende-boeken-tabel/uitgeleende-boeken-tabel.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SidemenuComponent } from './sidemenu/sidemenu.component';
+import { ItemPageComponent } from './item-page/item-page.component';
+import { GebruikerItemsTabelComponent } from './gebruiker-items-tabel/gebruiker-items-tabel.component';
+import { ScanItemComponent } from './scan-item/scan-item.component';
+import { QRCodeModule } from 'angular2-qrcode';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 @NgModule({
   declarations: [
@@ -24,13 +30,19 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     WachtwoordvergetenComponent,
     OverviewComponent,
     UitgeleendeBoekenTabelComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    SidemenuComponent,
+    ItemPageComponent,
+    GebruikerItemsTabelComponent,
+    ScanItemComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    QRCodeModule,
+    ZXingScannerModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

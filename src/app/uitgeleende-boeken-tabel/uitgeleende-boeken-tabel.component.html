@@ -1,26 +1,25 @@
 <ng-container *ngIf="items; else loadingError">
-<table class="table table-sm table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Item naam</th>
-      <th scope="col">Ontleend op:</th>
-      <th scope="col">Terug op:</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of items; let index = index">
-      <th scope="row">{{index + 1 + startNummer}}</th>
-      <td>{{item.item.naam}}</td>
-      <td>{{item.OntleendOp.toLocaleTimeString()}} - {{item.OntleendOp.toLocaleDateString()}}</td>
-      <td *ngIf="item.TerugOp; else geenTijd">{{item.TerugOp.toLocaleTimeString()}} -
-        {{item.TerugOp.toLocaleDateString()}}</td>
-      <ng-template #geenTijd>
-        <td> - </td>
-      </ng-template>
-    </tr>
-  </tbody>
-</table>
+  <table class="table table-sm table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Item naam</th>
+        <th scope="col">Ontleend op:</th>
+        <th scope="col">Terug op:</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items; let index = index" (click)="redirectTo(item)"> 
+          <td scope="row">{{index + 1 + startNummer}}</td>
+          <td>{{item.item.naam}}</td>
+          <td>{{item.OntleendOp | date: "hh:mm - dd/MM/yyyy" }}</td>
+          <td *ngIf="item.TerugOp; else geenTijd">{{item.TerugOp | date: "hh:mm - dd/MM/yyyy" }}</td>
+          <ng-template #geenTijd>
+            <td> - </td>
+          </ng-template>
+      </tr>
+    </tbody>
+  </table>
 </ng-container>
 
 <ng-template #loadingError>

@@ -17,6 +17,7 @@
     ********************* FORMULIER ***************************
     ***********************************************************
     ---------------------------------------------------------->
+    <ng-container *ngIf="!loading; else loadingError">
     <form [formGroup]="registreerFormulier" class="row" (ngSubmit)='registreerNieuweGebruiker()'>
       <div class="col-4">
         <label for="voornaam" class="marginTop10">Voornaam</label>
@@ -51,5 +52,16 @@
           [disabled]='!registreerFormulier.valid'>Registreer als nieuwe gebruiker!</button>
       </div>
     </form>
+    </ng-container>
   </div>
 </div>
+
+<ng-template #loadingError>
+  <div class="row">
+    <div class="col-2 offset-5 text-center">
+      <div class="spinner-border spinner" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+</ng-template>

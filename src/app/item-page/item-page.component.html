@@ -1,0 +1,52 @@
+<ng-container *ngIf="!loading; else loadingError">
+  <div class="row">
+    <div class="col-3">
+      <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col-7">
+      <table class="table-bordered">
+        <tr>
+          <th>Naam:</th>
+          <td>{{item.naam}}</td>
+        </tr>
+        <tr>
+          <th>Beschikbaar:</th>
+          <td> <i *ngIf="item.beschikbaar; else kruis" class="fas fa-check"></i></td>
+        </tr>
+        <tr>
+          <th>Id:</th>
+          <td>{{item.id}}</td>
+        </tr>
+        <tr>
+          <th>Qr-code:</th>
+          <td>
+            <qr-code [value]=item.id [size]="150"></qr-code>
+          </td>
+        </tr>
+      </table>
+
+      <h2>Dit item werd ontleend door: </h2>
+      <button *ngIf="item.gebruikerItems.length > 10" [disabled]="vanafGebruikerItems <= 0"
+        (click)="veranderGebruikerItemsScope(-1)">Minder</button>
+      <button *ngIf="item.gebruikerItems.length > 10"
+        [disabled]="item.gebruikerItems.length <= (vanafGebruikerItems + 10)"
+        (click)="veranderGebruikerItemsScope(1)">Meer</button>
+      <app-gebruiker-items-tabel [items]=getGebruikerItems() [startNummer]=vanafGebruikerItems>
+      </app-gebruiker-items-tabel>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #loadingError>
+  <div class="row">
+    <div class="col-2 offset-5 text-center">
+      <div class="spinner-border spinner" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #kruis>
+  <i #false class="fas fa-times"></i>
+</ng-template>

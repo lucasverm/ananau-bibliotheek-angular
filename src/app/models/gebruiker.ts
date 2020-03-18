@@ -6,8 +6,8 @@ export class Gebruiker {
     achternaam: string;
     email: string;
     wachtwoord: string;
-    geboortedatum: Date
-    foto: string;
+    geboortedatum: Date;
+    telefoonNummer: String;
     type: string;
     gebruikertems: GebruikerItem[];
 }

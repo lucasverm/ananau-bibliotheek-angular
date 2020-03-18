@@ -19,10 +19,6 @@ export class TopbarComponent implements OnInit {
     });
   }
 
-  public redirect(directory: string): void {
-    this.router.navigate([`/${directory}`]);
-  }
-
   public afmelden(): void {
     this.accountService.logout();
     this.router.navigate([`/login`])

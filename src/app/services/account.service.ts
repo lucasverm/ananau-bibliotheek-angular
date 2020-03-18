@@ -56,6 +56,31 @@ export class AccountService {
             );
     }
 
+    public registreer(voornaam: string, achternaam: string, telefoonNummer: string, email: string, password: string, passwordConfirmation: string): Observable<boolean> {
+        return this.http
+            .post(
+                `${environment.apiUrl}/Gebruiker/register`,
+                { voornaam, achternaam, telefoonNummer, email, password, passwordConfirmation },
+                { responseType: 'text' }
+            )
+            .pipe(
+                map((token: any) => {
+                    if (token) {
+                        const local = JSON.parse(token);
+                        localStorage.setItem(this._tokenKey, local.token);
+                        localStorage.setItem(
+                            'loggedUser',
+                            JSON.stringify(local.user)
+                        );
+                        this.user.next(local.user);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                })
+            );
+    }
+
     get token(): string {
         const localToken = localStorage.getItem(this._tokenKey);
         return !!localToken ? localToken : '';
@@ -68,11 +93,21 @@ export class AccountService {
             this.user.next(null);
         }
     }
+
+    checkUserNameAvailability = (email: string): Observable<boolean> => {
+        return this.http.get<boolean>(
+          `${environment.apiUrl}/Gebruiker/checkusername`,
+          {
+            params: { email }
+          }
+        );
+      };
 }
 
 function parseJwt(token) {
     if (!token) {
         return null;
+
     }
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');

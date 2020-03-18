@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GebruikerItem } from '../models/gebruiker-item';
+import { ClassGetter } from '@angular/compiler/src/output/output_ast';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-uitgeleende-boeken-tabel',
@@ -11,10 +13,12 @@ export class UitgeleendeBoekenTabelComponent implements OnInit {
   @Input() public items: GebruikerItem[];
   @Input() public startNummer: Boolean;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  ngOnInit() {
-
+  ngOnInit() { }
+  
+  redirectTo(item: any) {
+    this.router.navigate([`../item/${item.item.id}`]);
   }
 
 }

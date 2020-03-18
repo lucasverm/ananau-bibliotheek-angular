@@ -6,7 +6,7 @@ export class GebruikerItem {
     gebruiker: Gebruiker;
     item: Item;
     OntleendOp: Date;
-    TerugOp: Date;
+    TerugOp?: Date;
 
     static fromJSON(json: any): GebruikerItem {
         var item = new GebruikerItem();
@@ -14,7 +14,7 @@ export class GebruikerItem {
         item.gebruiker = json.gebruiker;
         item.item = json.item;
         item.OntleendOp = new Date(json.ontleendOp);
-        item.TerugOp = json.terugOp == "0001-01-01T00:00:00" ? undefined : new Date(json.terugOp);
+        item.TerugOp = json.terugOp == undefined ? undefined : new Date(json.terugOp);
         return item;
     }
 }
