@@ -4,7 +4,16 @@
       <app-sidemenu></app-sidemenu>
     </div>
     <div class="col-7">
-      <zxing-scanner></zxing-scanner>
+          <qr-scanner
+          [canvasWidth]="100"                   
+          [canvasHeight]="100"                   
+          [debug]="false"                       
+          [updateTime]="500"                    
+          [stopAfterScan]="true"                 
+          [chooseCamera]="chosenCameraSubject"   
+          (foundCameras)="listCameras($event)">  
+          (capturedQr)="decoded($event)"
+        </qr-scanner>
     </div>
   </div>
 </ng-container>
