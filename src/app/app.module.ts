@@ -18,7 +18,7 @@ import { ItemPageComponent } from './item-page/item-page.component';
 import { GebruikerItemsTabelComponent } from './gebruiker-items-tabel/gebruiker-items-tabel.component';
 import { ScanItemComponent } from './scan-item/scan-item.component';
 import { QRCodeModule } from 'angular2-qrcode';
-import { NgQrScannerModule } from 'angular2-qrscanner';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,7 @@ import { NgQrScannerModule } from 'angular2-qrscanner';
     ReactiveFormsModule,
     HttpClientModule,
     QRCodeModule,
-    NgQrScannerModule
+    ZXingScannerModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

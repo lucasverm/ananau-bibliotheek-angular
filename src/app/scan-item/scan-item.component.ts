@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 @Component({
   selector: 'app-scan-item',
@@ -9,17 +10,16 @@ import { Subject } from 'rxjs';
 export class ScanItemComponent implements OnInit {
 
   public loading: Boolean;
-  chosenCameraSubject = new Subject();
+  qrResultString: string;
 
-  decodedOutput($event: string) {
-    console.log('Decoded', $event);
+  clearResult(): void {
+    this.qrResultString = null;
   }
 
-  listCameras($event: MediaDeviceInfo[]) {
-    console.log('MediaDeviceInfo', $event);
-    this.chosenCameraSubject.next($event.filter(device => device.kind === 'videoinput')[0])
+  onCodeResult(resultString: string) {
+    this.qrResultString = resultString;
   }
-  
+
   constructor() { }
 
   ngOnInit() {
