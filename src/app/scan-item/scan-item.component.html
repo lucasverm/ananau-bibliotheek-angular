@@ -3,15 +3,43 @@
     <div class="col-3">
       <app-sidemenu></app-sidemenu>
     </div>
-    <div class="col-7">
-      <zxing-scanner (scanSuccess)="onCodeResult($event)"></zxing-scanner>
-      <section class="results" *ngIf="qrResultString">
-        <div>
-          <small>Result</small>
-          <strong>{{ qrResultString }}</strong>
+    <div class="col-9">
+      <div class="row">
+        <div class="col-12">
+          <h1>Scan een item: </h1>
+          <div class="alert alert-danger" role="alert" [hidden]="errorMessage == null">
+            {{ errorMessage }}
+          </div>
+          <div class="alert alert-success" role="alert" [hidden]="succesMessage == null">
+            {{ succesMessage }}
+          </div>
         </div>
-        <button mat-icon-button (click)="clearResult()">&times;</button>
-      </section>
+        <div class="col-4">
+          <form [formGroup]="scanFormulier">
+            <label id="id">Geef een naam in: </label>
+            <input formControlName="id" type="text" class="form-control" list="gebruikerList"
+              (change)="gekozenItem($event.target.value)" />
+            <datalist id="gebruikerList">
+              <option *ngFor="let item of zoekResultaat" id="{{ item.naam }}" [attr.data-index]="item.id">
+                {{ item.naam }}
+              </option>
+            </datalist>
+          </form>
+        </div>
+        <div class="col-1">
+          <div *ngIf="itemNamenAanHetInladen">
+            <div class="spinner-border spinner" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <button *ngIf="geselecteerdItem !=null" (click)="scanItem()" type="submit" class="btn btn-primary marginTop10">{{scanButtonText()}}</button>
+          <app-item-info [item]=geselecteerdItem [itemAanHetLaden]=itemAanHetLaden></app-item-info>
+        </div>
+      </div>
     </div>
   </div>
 </ng-container>

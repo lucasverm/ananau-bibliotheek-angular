@@ -1,14 +1,14 @@
 <table class="table table-bordered">
-  <tr>
-    <td><a [routerLink]="['/overview']" id="login">Overview</a></td>
+  <tr [routerLink]="['/overview']" id="login">
+    <td>Overview
   </tr>
-  <tr>
-    <td><a [routerLink]="['/scan']" id="login">Item scannen</a></td>
+  <tr [routerLink]="['/scan']" id="scan">
+    <td>Item scannen</td>
   </tr>
-  <tr>
-    <td><a [routerLink]="['/itembeheer']" id="login">Items beheren</a></td>
+  <tr [routerLink]="['/itembeheer']" id="itembeheer">
+    <td>Items beheren</td>
   </tr>
-  <tr>
-    <td><a [routerLink]="['/account']" id="login">Mijn account</a></td>
+  <tr [routerLink]="['/itembeheer']" id="itembeheer">
+    <td>Mijn account</td>
   </tr>
 </table>

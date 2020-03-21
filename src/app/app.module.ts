@@ -19,6 +19,7 @@ import { GebruikerItemsTabelComponent } from './gebruiker-items-tabel/gebruiker-
 import { ScanItemComponent } from './scan-item/scan-item.component';
 import { QRCodeModule } from 'angular2-qrcode';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { ItemInfoComponent } from './item-info/item-info.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     SidemenuComponent,
     ItemPageComponent,
     GebruikerItemsTabelComponent,
-    ScanItemComponent
+    ScanItemComponent,
+    ItemInfoComponent
   ],
   imports: [
     BrowserModule,

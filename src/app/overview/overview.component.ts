@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { OntleenService } from '../services/ontleen.service';
-import { Item } from '../models/item';
-import { GebruikerItem } from '../models/gebruiker-item';
+import { Item } from '../models/item.model';
+import { GebruikerItem } from '../models/gebruiker-item.model';
 import { AccountService } from '../services/account.service';
-import { Gebruiker } from '../models/gebruiker';
+import { Gebruiker } from '../models/gebruiker.model';
 
 @Component({
   selector: 'app-overview',

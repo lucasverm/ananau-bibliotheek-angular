@@ -1,5 +1,5 @@
-import { Gebruiker } from './gebruiker';
-import { Item } from './item';
+import { Gebruiker } from './gebruiker.model';
+import { Item } from './item.model';
 
 export class GebruikerItem {
     id: string;

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Item } from '../models/item';
+import { Item } from '../models/item.model';
 import { _ } from 'underscore';
-import { GebruikerItem } from '../models/gebruiker-item';
-
+import { GebruikerItem } from '../models/gebruiker-item.model';
 
 @Component({
   selector: 'app-item-page',

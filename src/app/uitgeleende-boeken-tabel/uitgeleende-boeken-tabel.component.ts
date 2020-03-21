@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { GebruikerItem } from '../models/gebruiker-item';
+import { GebruikerItem } from '../models/gebruiker-item.model';
 import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 import { Router } from '@angular/router';
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { GebruikerItem } from '../models/gebruiker-item';
+import { GebruikerItem } from '../models/gebruiker-item.model';
 
 @Component({
   selector: 'app-gebruiker-items-tabel',
@@ -13,6 +13,7 @@ export class GebruikerItemsTabelComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.items);
   }
 
 }

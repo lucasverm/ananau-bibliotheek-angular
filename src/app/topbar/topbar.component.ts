@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from '../services/account.service';
-import { Gebruiker } from '../models/gebruiker';
+import { Gebruiker } from '../models/gebruiker.model';
 
 @Component({
   selector: 'app-topbar',

@@ -1,4 +1,4 @@
-import { GebruikerItem } from './gebruiker-item';
+import { GebruikerItem } from './gebruiker-item.model';
 
 export class Gebruiker {
     id: string;

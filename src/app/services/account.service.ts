@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Gebruiker } from '../models/gebruiker';
+import { Gebruiker } from '../models/gebruiker.model';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
@@ -107,7 +107,6 @@ export class AccountService {
 function parseJwt(token) {
     if (!token) {
         return null;
-
     }
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');

@@ -11,9 +11,9 @@
     <tbody>
       <tr *ngFor="let item of items; let index = index">
         <td scope="row">{{index + 1 + startNummer}}</td>
-        <td>{{item.gebruikerVoornaam}} {{item.gebruikerAchternaam}}</td>
-        <td>{{item.ontleendOp | date: "hh:mm - dd/MM/yyyy" }}</td>
-        <td *ngIf="item.terugOp; else geenTijd">{{item.terugOp | date: "hh:mm - dd/MM/yyyy" }}</td>
+        <td>{{item.gebruiker.voornaam}} {{item.gebruiker.achternaam}}</td>
+        <td>{{item.OntleendOp | date: "hh:mm - dd/MM/yyyy" }}</td>
+        <td *ngIf="item.TerugOp; else geenTijd">{{item.TerugOp | date: "hh:mm - dd/MM/yyyy" }}</td>
         <ng-template #geenTijd>
           <td> - </td>
         </ng-template>

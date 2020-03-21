@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Item } from '../models/item';
-import { Observable, of } from 'rxjs';
+import { Item } from '../models/item.model';
+import { Observable, of, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -9,20 +9,25 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ItemService {
-
   constructor(private http: HttpClient) { }
 
-  getItem$(id: String): Observable<Item> {
-    return this.http.get(`${environment.apiUrl}/Item/${id}`).pipe(
+  /*getItem$(id: String): Observable<Item> {
+    return this.http.get<Item>(`${environment.apiUrl}/Item/byId/${id}`);
+  }*/
+
+  getItem$(id: string): Observable<Item> {
+    return this.http.get(`${environment.apiUrl}/Item/byId/${id}`).pipe(
       catchError(error => {
-        //this.loadingError$.next(error.statusText);
         return of(null);
       }),
-      map((item: any) => {
+      map((item: any): Item => {
+        item = Item.fromJSON(item);
         return item;
       })
     );
   }
 
-
+  getItemByName$ = (naam: string): Observable<Item[]> => {
+    return this.http.get<Item[]>(`${environment.apiUrl}/Item/byName/${naam}`);
+  };
 }

@@ -1,0 +1,29 @@
+table {
+  tr {
+    background-color: #0f754e;
+    color: white;
+
+    &:hover {
+      background-color: #ffd52d !important;
+      color: black;
+    }
+
+    &:active {
+      border: none;
+      box-shadow: none;
+      outline: 0;
+    }
+
+    &:focus {
+      border: none;
+      box-shadow: none;
+      outline: 0;
+    }
+
+    td {}
+  }
+}
+
+.no-padding {
+  padding: 0 !important;
+}
