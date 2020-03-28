@@ -1,11 +1,6 @@
 <div class="row">
   <div class="offset-4 col-4">
     <h1 class="text-center">Login</h1>
-    <!---------------------------------------------------------
-    ***********************************************************
-    ********************** ERRORS *****************************
-    ***********************************************************
-    ---------------------------------------------------------->
     <div class="alert alert-danger" role="alert" [hidden]="!((loginFormulier.get('email')['errors'] && loginFormulier.get('email').touched ) || 
     (loginFormulier.get('wachtwoord')['errors'] && loginFormulier.get('wachtwoord').touched) || errorMessage != null) 
     ">
@@ -18,11 +13,6 @@
       </p>
       <p>{{ errorMessage }}</p>
     </div>
-    <!---------------------------------------------------------
-    ***********************************************************
-    ********************* FORMULIER ***************************
-    ***********************************************************
-    ---------------------------------------------------------->
     <ng-container *ngIf="!loading; else loadingError">
       <form [formGroup]="loginFormulier" (ngSubmit)='logGebruikerIn()'>
         <label for="email">Emailadres</label>

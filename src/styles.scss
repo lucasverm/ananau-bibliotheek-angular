@@ -19,3 +19,25 @@
 .marginBottom0 {
   margin-bottom: 0px !important;
 }
+
+.marginLeft5 {
+  margin-left: 5px;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.btn-danger {
+  color: white !important;
+}
+
+.hoverUnderline {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.width100{
+  width: 100%;
+}

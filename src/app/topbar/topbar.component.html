@@ -3,11 +3,10 @@
     <img src="../../assets/images/ananau-logo.png" alt="" />
   </div>
   <div class="col-2 verticalAlign">
-    <app-language></app-language>
   </div>
   <div class="offset-5"></div>
   <div class="col-3 verticalAlign" *ngIf="aangemelde; else nietaangemeld">
-    <p>Hi, {{ aangemelde.voornaam }} | <a (click)="afmelden()">Afmelden</a></p>
+    <p>Hi, {{ aangemelde.voornaam }} | <a (click)="afmelden()"><i class="fas fa-sign-out-alt"></i> Afmelden</a></p>
   </div>
 </div>
 <ng-content></ng-content>

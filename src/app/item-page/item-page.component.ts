@@ -13,10 +13,14 @@ export class ItemPageComponent implements OnInit {
   public item: Item;
   public vanafGebruikerItems: number = 0;
   public loading: Boolean;
+  public successMessage: string = null;
 
   constructor(private router: Router, private route: ActivatedRoute) {
     this.route.data.subscribe(data => {
       this.item = data['item'];
+      if (this.router.getCurrentNavigation().extras.state != undefined) {
+        this.successMessage = this.router.getCurrentNavigation().extras.state.successMessage;
+      }
     });
   }
 

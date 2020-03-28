@@ -10,9 +10,12 @@ export class ItemInfoComponent implements OnInit {
   @Input() item: Item;
   @Input() itemAanHetLaden: Boolean;
 
-  constructor() { }
+  constructor() { 
+    
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 }
 

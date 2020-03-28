@@ -1,20 +1,27 @@
 <ng-container *ngIf="!loading; else loadingError">
   <div class="row">
-    <div class="col-3">
+    <div class="col-2 no-padding">
       <app-sidemenu></app-sidemenu>
     </div>
-    <div class="col-7">
+    <div class="col-8">
       <h1>Welkom, {{ingelogdeGebruiker.voornaam}} {{ingelogdeGebruiker.achternaam}}</h1>
 
       <h2>Items in uw bezit:</h2>
-      <button *ngIf="totaalOntleendeItems > 10" [disabled]="vanafOntleendeItems <= 0" (click)="veranderOntleendeItemsScope(-1)">Minder</button>
-      <button *ngIf="totaalOntleendeItems > 10" [disabled]="totaalOntleendeItems < (vanafOntleendeItems + hoeveelheidOntleendeItems)" (click)="veranderOntleendeItemsScope(1)">Meer</button>
-      <app-uitgeleende-boeken-tabel [items]=ontleendeItems [startNummer]=vanafOntleendeItems></app-uitgeleende-boeken-tabel>
-      
+      <button *ngIf="totaalOntleendeItems > 10" [disabled]="vanafOntleendeItems <= 0"
+        (click)="veranderOntleendeItemsScope(-1)"><i class="fas fa-arrow-left"></i></button>
+      <button *ngIf="totaalOntleendeItems > 10"
+        [disabled]="totaalOntleendeItems < (vanafOntleendeItems + hoeveelheidOntleendeItems)"
+        (click)="veranderOntleendeItemsScope(1)"><i class="fas fa-arrow-right"></i></button>
+      <app-uitgeleende-boeken-tabel [items]=ontleendeItems [startNummer]=vanafOntleendeItems>
+      </app-uitgeleende-boeken-tabel>
+
       <h2>Ontleen historie: </h2>
-      <button *ngIf="totaalHistoriek > 10" [disabled]="vanafHistoriek <= 0" (click)="veranderHistoriekScope(-1)">Minder</button>
-      <button *ngIf="totaalHistoriek > 10" [disabled]="totaalHistoriek < (vanafHistoriek + hoeveelheidHistoriek)" (click)="veranderHistoriekScope(1)">Meer</button>
-      <app-uitgeleende-boeken-tabel [items]=ontleendeHistorieItems [startNummer]=vanafHistoriek></app-uitgeleende-boeken-tabel>
+      <button *ngIf="totaalHistoriek > 10" [disabled]="vanafHistoriek <= 0" (click)="veranderHistoriekScope(-1)"><i
+          class="fas fa-arrow-left"></i></button>
+      <button *ngIf="totaalHistoriek > 10" [disabled]="totaalHistoriek < (vanafHistoriek + hoeveelheidHistoriek)"
+        (click)="veranderHistoriekScope(1)"><i class="fas fa-arrow-right"></i></button>
+      <app-uitgeleende-boeken-tabel [items]=ontleendeHistorieItems [startNummer]=vanafHistoriek>
+      </app-uitgeleende-boeken-tabel>
     </div>
   </div>
 </ng-container>

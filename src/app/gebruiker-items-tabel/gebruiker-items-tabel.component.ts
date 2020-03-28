@@ -9,11 +9,10 @@ import { GebruikerItem } from '../models/gebruiker-item.model';
 export class GebruikerItemsTabelComponent implements OnInit {
   @Input() public items: GebruikerItem[];
   @Input() public startNummer: number;
-  constructor() { 
+  constructor() {
   }
 
   ngOnInit() {
-    console.log(this.items);
   }
 
 }

@@ -1,9 +1,9 @@
 <ng-container *ngIf="!loading; else loadingError">
   <div class="row">
-    <div class="col-3">
+    <div class="col-2 no-padding">
       <app-sidemenu></app-sidemenu>
     </div>
-    <div class="col-9">
+    <div class="col-10">
       <div class="row">
         <div class="col-12">
           <h1>Scan een item: </h1>
@@ -36,7 +36,8 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <button *ngIf="geselecteerdItem !=null" (click)="scanItem()" type="submit" class="btn btn-primary marginTop10">{{scanButtonText()}}</button>
+          <button *ngIf="geselecteerdItem !=null" (click)="scanItem()" type="submit"
+            class="btn btn-primary marginTop10">{{scanButtonText()}}</button>
           <app-item-info [item]=geselecteerdItem [itemAanHetLaden]=itemAanHetLaden></app-item-info>
         </div>
       </div>

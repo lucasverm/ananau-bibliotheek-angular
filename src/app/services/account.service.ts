@@ -24,10 +24,16 @@ export class AccountService {
                 parsedToken = null;
             }
         }
+        if (JSON.parse(localStorage.getItem('loggedUser')) != null) {
+            this.user = new BehaviorSubject<Gebruiker>(
+                Gebruiker.fromJSON(JSON.parse(localStorage.getItem('loggedUser')))
+            );
+        } else {
+            this.user = new BehaviorSubject<Gebruiker>(
+                JSON.parse(localStorage.getItem('loggedUser'))
+            );
+        }
 
-        this.user = new BehaviorSubject<Gebruiker>(
-            JSON.parse(localStorage.getItem('loggedUser'))
-        );
         this.huidigeGebruiker = this.user.asObservable();
     }
 
@@ -43,11 +49,12 @@ export class AccountService {
                     if (token) {
                         const local = JSON.parse(token);
                         localStorage.setItem(this._tokenKey, local.token);
+                        var angularGebruiker = Gebruiker.fromJSON(local.user)
                         localStorage.setItem(
                             'loggedUser',
-                            JSON.stringify(local.user)
+                            JSON.stringify(angularGebruiker)
                         );
-                        this.user.next(local.user);
+                        this.user.next(angularGebruiker);
                         return true;
                     } else {
                         return false;
@@ -56,11 +63,11 @@ export class AccountService {
             );
     }
 
-    public registreer(voornaam: string, achternaam: string, telefoonNummer: string, email: string, password: string, passwordConfirmation: string): Observable<boolean> {
+    public registreer(voornaam: string, achternaam: string, telefoonNummer: string, email: string, password: string, passwordConfirmation: string, geboorteDatum: Date): Observable<boolean> {
         return this.http
             .post(
                 `${environment.apiUrl}/Gebruiker/register`,
-                { voornaam, achternaam, telefoonNummer, email, password, passwordConfirmation },
+                { voornaam, achternaam, telefoonNummer, email, password, passwordConfirmation, geboorteDatum },
                 { responseType: 'text' }
             )
             .pipe(
@@ -68,14 +75,38 @@ export class AccountService {
                     if (token) {
                         const local = JSON.parse(token);
                         localStorage.setItem(this._tokenKey, local.token);
+                        var angularGebruiker = Gebruiker.fromJSON(local.user)
                         localStorage.setItem(
                             'loggedUser',
-                            JSON.stringify(local.user)
+                            JSON.stringify(angularGebruiker)
                         );
-                        this.user.next(local.user);
+                        this.user.next(angularGebruiker);
                         return true;
                     } else {
                         return false;
+                    }
+                })
+            );
+    }
+
+    public updateGebruiker(id: string, voornaam: string, achternaam: string, telefoonNummer: string, email: string, geboorteDatum: Date): Observable<Gebruiker> {
+        return this.http
+            .put(
+                `${environment.apiUrl}/Gebruiker/${id}`,
+                { id, voornaam, achternaam, telefoonNummer, email, geboorteDatum },
+                { responseType: 'text' }
+            )
+            .pipe(
+                map((gebruiker: any) => {
+                    if (gebruiker) {
+                        const local = JSON.parse(gebruiker);
+                        /*localStorage.setItem(
+                            'loggedUser',
+                            JSON.stringify(gebruiker)
+                        );*/
+                        var angualargebruiker = Gebruiker.fromJSON(local)
+                        this.user.next(angualargebruiker);
+                        return angualargebruiker;
                     }
                 })
             );
@@ -96,12 +127,12 @@ export class AccountService {
 
     checkUserNameAvailability = (email: string): Observable<boolean> => {
         return this.http.get<boolean>(
-          `${environment.apiUrl}/Gebruiker/checkusername`,
-          {
-            params: { email }
-          }
+            `${environment.apiUrl}/Gebruiker/checkusername`,
+            {
+                params: { email }
+            }
         );
-      };
+    };
 }
 
 function parseJwt(token) {

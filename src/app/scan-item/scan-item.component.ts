@@ -101,6 +101,7 @@ export class ScanItemComponent implements OnInit {
       this.itemNamenAanHetInladen = true;
       this.geselecteerdItem = null;
       this.errorMessage = null;
+      this.succesMessage = null;
       return checkAvailabilityFn(control.value).pipe(
         catchError(error => {
           this.errorMessage = error.error;

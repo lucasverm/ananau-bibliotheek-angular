@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { TopbarComponent } from './topbar/topbar.component';
-import { LanguageComponent } from './language/language.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegistreerComponent } from './registreer/registreer.component';
 import { WachtwoordvergetenComponent } from './wachtwoordvergeten/wachtwoordvergeten.component';
@@ -20,13 +19,16 @@ import { ScanItemComponent } from './scan-item/scan-item.component';
 import { QRCodeModule } from 'angular2-qrcode';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { ItemInfoComponent } from './item-info/item-info.component';
+import { AccountWijzigenComponent } from './account-wijzigen/account-wijzigen.component';
+import { ItemsBeherenComponent } from './items-beheren/items-beheren.component';
+import { ItemToevoegenComponent } from './item-toevoegen/item-toevoegen.component';
+import { ItemWijzigenComponent } from './item-wijzigen/item-wijzigen.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     TopbarComponent,
-    LanguageComponent,
     RegistreerComponent,
     WachtwoordvergetenComponent,
     OverviewComponent,
@@ -36,7 +38,11 @@ import { ItemInfoComponent } from './item-info/item-info.component';
     ItemPageComponent,
     GebruikerItemsTabelComponent,
     ScanItemComponent,
-    ItemInfoComponent
+    ItemInfoComponent,
+    AccountWijzigenComponent,
+    ItemsBeherenComponent,
+    ItemToevoegenComponent,
+    ItemWijzigenComponent
   ],
   imports: [
     BrowserModule,

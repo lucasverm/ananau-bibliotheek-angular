@@ -43,7 +43,8 @@ export class RegistreerComponent implements OnInit {
         this.registreerFormulier.value.telefoon,
         this.registreerFormulier.value.email,
         this.registreerFormulier.value.wachtwoord,
-        this.registreerFormulier.value.herhaalWachtwoord
+        this.registreerFormulier.value.herhaalWachtwoord,
+        this.registreerFormulier.value.geboorteDatum
       )
       .subscribe(
         val => {

@@ -1,0 +1,47 @@
+<ng-container *ngIf="!loading; else loadingError">
+  <div class="row">
+    <div class="col-2 no-padding">
+      <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col-10">
+      <div class="row">
+        <div class="col-12">
+          <h1>Item toevoegen</h1>
+          <div class="row">
+            <div class="offset-2 col-8">
+              <div class="alert alert-success" role="alert" [hidden]="successMessage == null">
+                {{successMessage}}
+              </div>
+              <div class="alert alert-danger" role="alert" [hidden]="errorMessage == null">
+                {{errorMessage}}
+              </div>
+            </div>
+          </div>
+          <form [formGroup]="itemToevoegenFormulier" (ngSubmit)='itemToevoegen()'>
+            <div class="row">
+              <div class="col-4">
+                <label for="naam" class="marginTop10">Naam:</label>
+                <input type="text" class="form-control" id="naam" formControlName="naam">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <button type="submit" class="btn btn-primary marginTop10 width100"
+                  [disabled]='!itemToevoegenFormulier.valid'>Item toevoegen!</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-template #loadingError>
+  <div class="row">
+    <div class="col-2 offset-5 text-center">
+      <div class="spinner-border spinner" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+</ng-template>
