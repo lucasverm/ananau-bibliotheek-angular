@@ -15,6 +15,6 @@ export class ItemResolver implements Resolve<Item> {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<Item> {
-        return this.itemService.getItem$(route.params["id"]);
+        return this.itemService.getItemById$(route.params["id"]);
     }
 }

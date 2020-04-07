@@ -1,7 +1,15 @@
-table {
-  tr {
-    background-color: #0f754e;
+div {
+
+  &.menu-item {
+    background-color: #0f754e !important;
     color: white;
+    text-align: center;
+    padding: 10px 0px !important;
+    border-bottom: 1px solid white;
+
+    &:first-child {
+      border-top: 1px solid white;
+    }
 
     &:hover {
       background-color: #ffd52d !important;
@@ -20,9 +28,40 @@ table {
       outline: 0;
     }
 
+    p {
+      margin-bottom: 0px;
+
+      i {
+        margin-right: 10px;
+      }
+    }
   }
 }
 
-i {
-  margin-right:10px;
+@media (min-width:576px) {
+  div {
+    &.menu-item {
+      border-top: 1px solid white !important;
+      border-bottom: none !important;
+      border-left: 1px solid white !important;
+      &:first-child {
+        border-top: none white;
+        border-left: none !important;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  div {
+    &.menu-item {
+      border-top: none !important;
+      border-bottom: 1px solid white !important;
+      border-left: none !important;
+
+      &:first-child {
+        border-top: 1px solid white !important;
+      }
+    }
+  }
 }

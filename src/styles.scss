@@ -1,16 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+$groen: #0f754e;
+$geel: #ffd52d;
 
-.btn-primary,
-.btn-primary:active,
-.btn-primary:visited {
+div,
+table,
+td,
+tr,
+th {
+  border: 1px solid red;
+}
+
+.btn-primary {
   border: none !important;
-  background-color: #0f754e !important;
+  background-color: $groen !important;
+
+  &:visited {
+    color: black !important;
+  }
+
+  &:hover {
+
+    &:enabled {
+      background-color: $geel !important;
+      color: black;
+    }
+  }
+
+  &:active {
+    color: black !important;
+  }
+
+  &.geleButton {
+    background-color: $geel !important;
+    color: black !important;
+  }
 }
 
-.btn-primary:hover:enabled {
-  background-color: #ffd52d !important;
-  color: black;
-}
 
 .marginTop10 {
   margin-top: 10px;
@@ -38,6 +63,18 @@
   }
 }
 
-.width100{
+.width100 {
   width: 100%;
+}
+
+.border1pxSolidBlack {
+  border: 1px solid black;
+}
+
+.linkText {
+  color: $groen !important;
+}
+
+body {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
 }

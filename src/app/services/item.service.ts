@@ -4,16 +4,22 @@ import { Observable, of, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { AccountService } from './account.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemService {
-  constructor(private http: HttpClient) { }
+  constructor(private router: Router, private accountService: AccountService, private http: HttpClient) { }
 
-  getItem$(id: string): Observable<Item> {
+  getItemById$(id: string): Observable<Item> {
     return this.http.get(`${environment.apiUrl}/Item/byId/${id}`).pipe(
       catchError(error => {
+        if (error.status == 401) {
+          this.accountService.logout();
+          this.router.navigate([`/login`], { state: { errorMessage: 'Uw login token is verstreken: log je opnieuw in!' } })
+        }
         return of(null);
       }),
       map((item: any): Item => {
@@ -23,9 +29,28 @@ export class ItemService {
     );
   }
 
+  getItemByName$(naam: string): Observable<Item> {
+    return this.http.get(`${environment.apiUrl}/Item/byName/${naam}`).pipe(
+      catchError(error => {
+        if (error.status == 401) {
+          this.accountService.logout();
+          this.router.navigate([`/login`], { state: { errorMessage: 'Uw login token is verstreken: log je opnieuw in!' } })
+        }
+        return of(null);
+      }),
+      map((item: any): Item => {
+        return Item.fromJSON(item);
+      })
+    );
+  }
+
   deleteItem$(item: Item): Observable<Item> {
     return this.http.delete(`${environment.apiUrl}/Item/${item.id}`).pipe(
       catchError(error => {
+        if (error.status == 401) {
+          this.accountService.logout();
+          this.router.navigate([`/login`], { state: { errorMessage: 'Uw login token is verstreken: log je opnieuw in!' } })
+        }
         return of(null);
       }),
       map((item: any): Item => {
@@ -39,6 +64,13 @@ export class ItemService {
     return this.http.post(`${environment.apiUrl}/Item`,
       { naam }, { responseType: 'json' })
       .pipe(
+        catchError(error => {
+          if (error.status == 401) {
+            this.accountService.logout();
+            this.router.navigate([`/login`], { state: { errorMessage: 'Uw login token is verstreken: log je opnieuw in!' } })
+          }
+          return of(null);
+        }),
         map((item: any): Item => {
           item = Item.fromJSON(item);
           return item;
@@ -54,6 +86,13 @@ export class ItemService {
         gearchiveerd: item.gearchiveerd
       }, { responseType: 'json' })
       .pipe(
+        catchError(error => {
+          if (error.status == 401) {
+            this.accountService.logout();
+            this.router.navigate([`/login`], { state: { errorMessage: 'Uw login token is verstreken: log je opnieuw in!' } })
+          }
+          return of(null);
+        }),
         map((item: any): Item => {
           item = Item.fromJSON(item);
           return item;
@@ -61,8 +100,8 @@ export class ItemService {
       );
   }
 
-  getItemByName$ = (naam: string): Observable<Item[]> => {
-    return this.http.get<Item[]>(`${environment.apiUrl}/Item/byName/${naam}`);
+  getItemContainsWordInName$ = (naam: string): Observable<Item[]> => {
+    return this.http.get<Item[]>(`${environment.apiUrl}/Item/byContainsName/${naam}`);
   };
 
   getItemsWithFilter$(
@@ -76,7 +115,7 @@ export class ItemService {
     ToegevoegdOpSorterenDESC: boolean,
     ItemFilter: string,
     BeschikbaarFilter: string,
-    Gearchiveerd:Boolean): Observable<Item[]> {
+    Gearchiveerd: Boolean): Observable<Item[]> {
     return this.http.post(`${environment.apiUrl}/Item/getAllWithFilter`,
       {
         itemsVanaf,
@@ -94,6 +133,10 @@ export class ItemService {
       { responseType: 'json' })
       .pipe(
         catchError(error => {
+          if (error.status == 401) {
+            this.accountService.logout();
+            this.router.navigate([`/login`], { state: { errorMessage: 'Uw login token is verstreken: log je opnieuw in!' } })
+          }
           return of(null);
         }),
         map((json: any[]): any[] => {

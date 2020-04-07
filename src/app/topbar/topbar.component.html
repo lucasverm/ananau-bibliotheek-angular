@@ -1,16 +1,16 @@
 <div class="row topbar align-middle">
-  <div class="col-2">
+  <div class="col-6">
     <img src="../../assets/images/ananau-logo.png" alt="" />
   </div>
-  <div class="col-2 verticalAlign">
-  </div>
-  <div class="offset-5"></div>
-  <div class="col-3 verticalAlign" *ngIf="aangemelde; else nietaangemeld">
-    <p>Hi, {{ aangemelde.voornaam }} | <a (click)="afmelden()"><i class="fas fa-sign-out-alt"></i> Afmelden</a></p>
+  <div class="col-6 text-right verticalAlign" *ngIf="aangemelde; else nietaangemeld">
+  <a class="btn btn-primary geleButton" (click)="afmelden()"><i class="fas fa-sign-out-alt"></i> Afmelden</a>
   </div>
 </div>
 <ng-content></ng-content>
 
 <ng-template #nietaangemeld>
-  <a [routerLink]="['/login']" id="login">Login</a> | <a [routerLink]="['/register']" id="register">Registreer</a>
+  <div class="col-6 text-right verticalAlign">
+    <a class="btn btn-primary geleButton" *ngIf="(router.url == '/register') || (router.url  =='/wachtwoordvergeten')" [routerLink]="['/login']" id="login">Login</a>
+    <a class="btn btn-primary geleButton" *ngIf="(router.url == '/login')" [routerLink]="['/register']" id="register">Registreer</a>
+  </div>
 </ng-template>

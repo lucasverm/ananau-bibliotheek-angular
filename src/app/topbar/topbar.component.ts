@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AccountService } from '../services/account.service';
 import { Gebruiker } from '../models/gebruiker.model';
 
@@ -11,9 +11,10 @@ import { Gebruiker } from '../models/gebruiker.model';
 export class TopbarComponent implements OnInit {
   public aangemelde: Gebruiker;
 
-  constructor(private router: Router, private accountService: AccountService) { }
+  constructor(public route: ActivatedRoute, private router: Router, private accountService: AccountService) { }
 
   ngOnInit() {
+    console.log();
     this.accountService.huidigeGebruiker.subscribe(t => {
       this.aangemelde = t;
     });

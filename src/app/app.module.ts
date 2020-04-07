@@ -17,12 +17,12 @@ import { ItemPageComponent } from './item-page/item-page.component';
 import { GebruikerItemsTabelComponent } from './gebruiker-items-tabel/gebruiker-items-tabel.component';
 import { ScanItemComponent } from './scan-item/scan-item.component';
 import { QRCodeModule } from 'angular2-qrcode';
-import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { ItemInfoComponent } from './item-info/item-info.component';
 import { AccountWijzigenComponent } from './account-wijzigen/account-wijzigen.component';
 import { ItemsBeherenComponent } from './items-beheren/items-beheren.component';
 import { ItemToevoegenComponent } from './item-toevoegen/item-toevoegen.component';
 import { ItemWijzigenComponent } from './item-wijzigen/item-wijzigen.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 @NgModule({
   declarations: [

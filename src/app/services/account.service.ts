@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Gebruiker } from '../models/gebruiker.model';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,7 @@ export class AccountService {
     public huidigeGebruiker: Observable<Gebruiker>;
     public redirectUrl: string;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
         let parsedToken = parseJwt(localStorage.getItem(this._tokenKey));
         if (parsedToken) {
             const expires =
@@ -97,6 +98,13 @@ export class AccountService {
                 { responseType: 'text' }
             )
             .pipe(
+                catchError(error => {
+                    if (error.status == 401) {
+                        this.logout();
+                        this.router.navigate([`/login`], { state: { errorMessage: 'Uw login token is verstreken: log je opnieuw in!' } })
+                    }
+                    return of(null);
+                }),
                 map((gebruiker: any) => {
                     if (gebruiker) {
                         const local = JSON.parse(gebruiker);

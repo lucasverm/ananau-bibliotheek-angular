@@ -1,4 +1,4 @@
-<table class="table table-bordered">
+<!--<table class="table table-bordered">
   <tr [routerLink]="['/overview']" id="login">
     <td><i class="fas fa-book"></i>Overview
   </tr>
@@ -11,4 +11,18 @@
   <tr [routerLink]="['/account']" id="account">
     <td><i class="fas fa-user"></i>Mijn account</td>
   </tr>
-</table>
+</table>-->
+<div class="row">
+  <div [routerLink]="['/overview']" class="col-12 col-sm-3 col-md-12 menu-item">
+    <p><i class="fas fa-book"></i>Overview</p>
+  </div>
+  <div [routerLink]="['/scan']" class="col-12 col-sm-3 col-md-12 menu-item">
+    <p><i class="fas fa-qrcode"></i>Item scannen</p>
+  </div>
+  <div [routerLink]="['/itemsbeheren']" class="col-12 col-sm-3 col-md-12 menu-item">
+    <p><i class="fas fa-globe"></i>Items beheren</p>
+  </div>
+  <div [routerLink]="['/account']" class="col-12 col-sm-3 col-md-12 menu-item">
+    <p><i class="fas fa-user"></i>Mijn account</p>
+  </div>
+</div>

@@ -9,6 +9,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
 
   public errorMessage: string;
@@ -17,7 +18,13 @@ export class LoginComponent implements OnInit {
   public loading: Boolean;
   public loginFormulier: FormGroup;
 
-  constructor(public router: Router, private fb: FormBuilder, private accountService: AccountService) { }
+  constructor(public router: Router, private fb: FormBuilder, private accountService: AccountService) {
+    if (this.router.getCurrentNavigation().extras.state != undefined) {
+      this.errorMessage = this.router.getCurrentNavigation().extras.state.errorMessage;
+    }
+
+    
+  }
 
   ngOnInit() {
     this.loginFormulier = this.fb.group({
@@ -50,10 +57,11 @@ export class LoginComponent implements OnInit {
         this.loading = false;
       },
       (err: HttpErrorResponse) => {
-        console.log(err);
         if (err.error instanceof Error) {
           this.errorMessage = `${err.error} `;
-        } else if (err.error instanceof ProgressEvent) {
+        } else if (err.status == 0) {
+          this.errorMessage = `Onbekende error: probeer het later opnieuw!`;
+        }else if (err.error instanceof ProgressEvent) {
           this.errorMessage = `${err.statusText} `;
         } else {
           this.errorMessage = `${err.error} `;

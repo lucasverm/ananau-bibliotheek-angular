@@ -10,6 +10,7 @@ import { map, catchError } from 'rxjs/operators';
 import { Item } from '../models/item.model';
 import { OntleenService } from '../services/ontleen.service';
 import { GebruikerItem } from '../models/gebruiker-item.model';
+import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-scan-item',
@@ -28,22 +29,14 @@ export class ScanItemComponent implements OnInit {
   public geselecteerdItem: Item;
   public itemNamenAanHetInladen: Boolean = false;
   public itemAanHetLaden: Boolean = false;
+  public scannerEnabled: Boolean = true;
 
   constructor(public router: Router, private fb: FormBuilder, private ontleenService: OntleenService, private itemService: ItemService) { }
 
   ngOnInit() {
     this.scanFormulier = this.fb.group({
-      id: ['', [Validators.required], this.serverSideValidateUsername(this.itemService.getItemByName$)]
+      naam: ['', [Validators.required], this.serverSideValidateUsername(this.itemService.getItemContainsWordInName$)]
     })
-  }
-
-  scanButtonText(): string {
-    if (this.geselecteerdItem.beschikbaar) {
-      return "Onteen dit item!"
-    } else {
-      return "Breng item terug!"
-    }
-
   }
 
   scanItem() {
@@ -58,18 +51,18 @@ export class ScanItemComponent implements OnInit {
           } else {
             this.succesMessage = `Het item "${gebruikerItem.item.naam}" werd door jou terug gebracht op: ${this.formatDate(gebruikerItem.TerugOp)}!`
           }
-          this.itemService.getItem$(this.geselecteerdItem.id).subscribe(
+          this.itemService.getItemById$(this.geselecteerdItem.id).subscribe(
             val => {
               if (val) {
                 this.geselecteerdItem = val;
               }
             },
             error => {
+              console.log(error);
               this.errorMessage = error.error;
             }
           )
         }
-
       },
       error => {
         console.log(error);
@@ -84,13 +77,22 @@ export class ScanItemComponent implements OnInit {
     return uitvoer;
   }
 
-  public gekozenItem(e: string): void {
+  public gekozenItem(naam: string): void {
     this.itemAanHetLaden = true;
-    if (e) {
-      this.geselecteerdItem = this.zoekResultaat.find(
-        g => g.naam === e
-      );
-    }
+    this.itemService.getItemByName$(naam).subscribe(
+      val => {
+        if (val) {
+          this.scanFormulier.reset();
+          this.geselecteerdItem = val;
+          this.itemNamenAanHetInladen = false;
+        }
+      },
+      (error) => {
+        console.log(error)
+        this.errorMessage = error.error;
+        this.itemNamenAanHetInladen = false;
+      }
+    );
     this.itemAanHetLaden = false;
   }
 

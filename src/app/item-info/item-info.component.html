@@ -19,8 +19,9 @@
     </tr>
     <tr>
       <th>Qr-code:</th>
-      <td>
-        <qr-code [value]=item.id [size]="150"></qr-code>
+      <td id="qr">
+        <qr-code [value]=item.naam [size]="150"></qr-code>
+        <button class="btn btn-primary" (click)="downloadQrCode()">download</button>
       </td>
     </tr>
     <tr *ngIf="!item.beschikbaar">
