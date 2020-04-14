@@ -1,5 +1,6 @@
 import { GebruikerItem } from './gebruiker-item.model';
 import { _ } from 'underscore';
+import { ItemCategorie } from './item-categorie.enum';
 
 export class Item {
     id: string;
@@ -8,8 +9,13 @@ export class Item {
     gearchiveerd: boolean;
     gebruikerItems: GebruikerItem[];
     toegevoegdOp: Date;
+    categorie: ItemCategorie;
+    materiaal: string;
+    merk: string;
+    aankoopDatum: Date;
+    inhoud: string;
 
-    constructor() {}
+    constructor() { }
 
     static fromJSON(json: any): Item {
         var item = new Item();
@@ -19,6 +25,11 @@ export class Item {
         item.gearchiveerd = json.gearchiveerd;
         item.gebruikerItems = json.gebruikerItems.map(GebruikerItem.fromJSON);
         item.toegevoegdOp = new Date(json.toegevoegdOp);
+        item.categorie = Object.values(ItemCategorie)[json.categorie];
+        item.materiaal = json.materiaal;
+        item.merk = json.merk;
+        item.aankoopDatum = json.aankoopDatum != null ? new Date(json.aankoopDatum) : null;
+        item.inhoud = json.inhoud;
         return item;
     }
     public ontleendDoor(): string {

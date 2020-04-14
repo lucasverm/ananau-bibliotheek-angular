@@ -1,13 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 $groen: #0f754e;
 $geel: #ffd52d;
+$donkerblauw: #1e414e;
+
 
 div,
 table,
 td,
 tr,
 th {
-  border: 1px solid red;
+  //border: 1px solid red;
+}
+
+.btn-success {
+  color: white !important;
 }
 
 .btn-primary {
@@ -15,30 +21,45 @@ th {
   background-color: $groen !important;
 
   &:visited {
-    color: black !important;
+    color: $donkerblauw !important;
   }
 
   &:hover {
 
     &:enabled {
       background-color: $geel !important;
-      color: black;
+      color: $donkerblauw;
     }
   }
 
   &:active {
-    color: black !important;
+    color: $donkerblauw !important;
   }
 
   &.geleButton {
     background-color: $geel !important;
     color: black !important;
+
+    &:hover {
+      background-color: $donkerblauw !important;
+      color: white !important;
+    }
+  }
+}
+
+.tableHoverLink {
+  &:hover {
+    background-color: rgba(0, 0, 0, .075);
   }
 }
 
 
 .marginTop10 {
   margin-top: 10px;
+}
+
+.marginBottom1O {
+  margin-bottom: 10px;
 }
 
 .marginBottom0 {
@@ -68,7 +89,7 @@ th {
 }
 
 .border1pxSolidBlack {
-  border: 1px solid black;
+  border: 1px solid $donkerblauw;
 }
 
 .linkText {
@@ -77,4 +98,25 @@ th {
 
 body {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+
+@media (max-width : 576px) {
+  .width100OnlyMobile {
+    width: 100% !important;
+  }
+}
+
+@media (min-width : 768px) {
+  .btn {
+    width: auto;
+  }
 }

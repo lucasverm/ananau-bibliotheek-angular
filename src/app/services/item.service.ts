@@ -60,9 +60,9 @@ export class ItemService {
     );
   }
 
-  addItem$(naam: string): Observable<any> {
+  addItem$(naam: string, merk: string, materiaal: string, categorie: string, inhoud: string, aankoopDatum: Date): Observable<any> {
     return this.http.post(`${environment.apiUrl}/Item`,
-      { naam }, { responseType: 'json' })
+      { naam, merk, materiaal, categorie, inhoud, aankoopDatum }, { responseType: 'json' })
       .pipe(
         catchError(error => {
           if (error.status == 401) {
@@ -115,7 +115,8 @@ export class ItemService {
     ToegevoegdOpSorterenDESC: boolean,
     ItemFilter: string,
     BeschikbaarFilter: string,
-    Gearchiveerd: Boolean): Observable<Item[]> {
+    Gearchiveerd: Boolean,
+    CategorieFilter: number): Observable<Item[]> {
     return this.http.post(`${environment.apiUrl}/Item/getAllWithFilter`,
       {
         itemsVanaf,
@@ -128,7 +129,8 @@ export class ItemService {
         ToegevoegdOpSorterenDESC,
         ItemFilter,
         BeschikbaarFilter,
-        Gearchiveerd
+        Gearchiveerd,
+        CategorieFilter
       },
       { responseType: 'json' })
       .pipe(

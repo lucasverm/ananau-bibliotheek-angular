@@ -4,6 +4,7 @@ import { Item } from '../models/item.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ItemCategorie } from '../models/item-categorie.enum';
 
 @Component({
   selector: 'app-items-beheren',
@@ -26,18 +27,22 @@ export class ItemsBeherenComponent implements OnInit {
   public aantalItems: number = 25;
   public totaalAantalItemsBeschikaar;
   public gearchiveerd: boolean = false;
+  public itemCategorieen = ItemCategorie
+  public itemCategorieenSleutels = Object.keys(ItemCategorie)
+  public categorieFilter: number = -1;
 
-  constructor(private itemService: ItemService, private router: Router, private fb: FormBuilder, ) { }
+  constructor(private itemService: ItemService, public router: Router, private fb: FormBuilder, ) { }
 
   ngOnInit() {
     this.filterFormulier = this.fb.group({
       itemNaam: [''],
-      beschikbaar: ['beiden']
+      beschikbaar: ['beiden'],
+      categorie: [this.categorieFilter]
     })
     this.getItemMetFilterEnSorten();
   }
 
-  verwijderItem(item:Item) {
+  verwijderItem(item: Item) {
     this.errorMessage = null;
     this.successMessage = null;
     this.itemService.deleteItem$(item).subscribe(
@@ -56,6 +61,7 @@ export class ItemsBeherenComponent implements OnInit {
   archiveringAanpassen(item: Item) {
     this.errorMessage = null;
     this.successMessage = null;
+    this.loadingItems = true;
     item.gearchiveerd = !item.gearchiveerd;
     this.itemService.putItem$(item).subscribe(
       val => {
@@ -70,7 +76,7 @@ export class ItemsBeherenComponent implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
-        item.gearchiveerd = !item.gearchiveerd;
+        console.log(error);
         this.errorMessage = error.error;
       }
     );
@@ -82,6 +88,7 @@ export class ItemsBeherenComponent implements OnInit {
     this.beschikbaarFilter == null;
     this.filterFormulier.get('itemNaam').setValue("");
     this.filterFormulier.get('beschikbaar').setValue("beiden");
+    this.filterFormulier.get('categorie').setValue(-1);
     this.gearchiveerd = false;
     this.filteren();
   }
@@ -95,6 +102,7 @@ export class ItemsBeherenComponent implements OnInit {
     this.loadingItems = true;
     this.itemFilter = this.filterFormulier.value.itemNaam;
     this.beschikbaarFilter = this.filterFormulier.value.beschikbaar;
+    this.categorieFilter = Object.values(this.itemCategorieenSleutels).indexOf(this.filterFormulier.value.categorie);
     this.getItemMetFilterEnSorten();
   }
 
@@ -157,7 +165,9 @@ export class ItemsBeherenComponent implements OnInit {
       this.toegevoegdOpSorteren == "asc",
       this.toegevoegdOpSorteren == "desc",
       this.itemFilter,
-      this.beschikbaarFilter, this.gearchiveerd).subscribe(
+      this.beschikbaarFilter,
+      this.gearchiveerd,
+      this.categorieFilter).subscribe(
         val => {
           if (val) {
             this.loadingItems = false;

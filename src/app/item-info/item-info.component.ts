@@ -12,7 +12,7 @@ export class ItemInfoComponent implements OnInit {
   @Input() itemAanHetLaden: Boolean;
 
   constructor() {
-
+    
   }
 
   downloadQrCode() {  // Create new img element

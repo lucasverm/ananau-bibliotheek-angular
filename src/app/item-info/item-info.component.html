@@ -1,13 +1,14 @@
 <ng-container *ngIf="item != null">
-  <h1>Item: {{item.naam}}</h1>
-  <table class="table-bordered">
+  <table class="table-bordered marginTop10 marginBottom1O">
     <tr>
       <th>Naam:</th>
       <td>{{item.naam}}</td>
     </tr>
     <tr>
       <th>Beschikbaar:</th>
-      <td> <i *ngIf="item.beschikbaar; else kruis" class="fas fa-check"></i></td>
+      <td>
+        <i *ngIf="item.beschikbaar" class="fas fa-check green"></i>
+        <i *ngIf="!item.beschikbaar" class="fas fa-times red"></i></td>
     </tr>
     <tr *ngIf="item.gearchiveerd">
       <th>Gearchiveerd:</th>
@@ -18,10 +19,31 @@
       <td>{{item.toegevoegdOp | date: "hh:mm - dd/MM/yyyy" }}</td>
     </tr>
     <tr>
+      <th>Categorie:</th>
+      <td>{{item.categorie}}</td>
+    </tr>
+    <tr>
+      <th>Merk:</th>
+      <td>{{item.merk ? item.merk : "/"}}</td>
+    </tr>
+    <tr>
+      <th>Materiaal:</th>
+      <td>{{item.materiaal ? item.materiaal : "/"}}</td>
+    </tr>
+    <tr>
+      <th>Inhoud:</th>
+      <td>{{item.inhoud ? item.inhoud : "/"}}</td>
+    </tr>
+    <tr>
+      <th>Aankoop datum:</th>
+      <td *ngIf="item.aankoopDatum">{{item.aankoopDatum | date: "dd/MM/yyyy"}}</td>
+      <td *ngIf="!item.aankoopDatum">/</td>
+    </tr>
+    <tr>
       <th>Qr-code:</th>
       <td id="qr">
-        <qr-code [value]=item.naam [size]="150"></qr-code>
-        <button class="btn btn-primary" (click)="downloadQrCode()">download</button>
+        <qr-code [value]=item.naam [size]=""></qr-code>
+        <button class="btn btn-primary" (click)="downloadQrCode()">Download</button>
       </td>
     </tr>
     <tr *ngIf="!item.beschikbaar">
@@ -47,8 +69,4 @@
       </div>
     </div>
   </div>
-</ng-template>
-
-<ng-template #kruis>
-  <i class="fas fa-times"></i>
 </ng-template>

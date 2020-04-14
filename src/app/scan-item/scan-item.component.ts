@@ -82,7 +82,9 @@ export class ScanItemComponent implements OnInit {
     this.itemService.getItemByName$(naam).subscribe(
       val => {
         if (val) {
-          this.scanFormulier.reset();
+          this.scanFormulier.setValue({
+            naam: naam
+          });
           this.geselecteerdItem = val;
           this.itemNamenAanHetInladen = false;
         }
@@ -100,13 +102,15 @@ export class ScanItemComponent implements OnInit {
     checkAvailabilityFn: (n: string) => Observable<Item[]>
   ): ValidatorFn {
     return (control: AbstractControl): Observable<{ [key: string]: any }> => {
+      document.getElementById("zoekVeld").style.cssText = "";
       this.itemNamenAanHetInladen = true;
       this.geselecteerdItem = null;
       this.errorMessage = null;
       this.succesMessage = null;
       return checkAvailabilityFn(control.value).pipe(
         catchError(error => {
-          this.errorMessage = error.error;
+         // this.errorMessage = error.error;
+         document.getElementById("zoekVeld").style.cssText = "border: 1px solid red !important; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px red;";
           this.itemNamenAanHetInladen = false;
           return of(null);
         }),

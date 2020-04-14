@@ -23,7 +23,12 @@ export class ItemWijzigenComponent implements OnInit {
 
   ngOnInit() {
     this.itemWijzigenFormulier = this.fb.group({
-      naam: [this.item.naam, [Validators.required]]
+      naam: [this.item.naam, [Validators.required]],
+      merk: [this.item.merk],
+      materiaal: [this.item.materiaal],
+      categorie: [this.item.categorie],
+      inhoud: [this.item.inhoud],
+      aankoopDatum: [this.item.aankoopDatum.toISOString().substring(0, 10)]
     })
   }
 

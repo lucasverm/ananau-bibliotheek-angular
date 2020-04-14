@@ -11,7 +11,7 @@ import { Gebruiker } from '../models/gebruiker.model';
 export class TopbarComponent implements OnInit {
   public aangemelde: Gebruiker;
 
-  constructor(public route: ActivatedRoute, private router: Router, private accountService: AccountService) { }
+  constructor(public route: ActivatedRoute, public router: Router, private accountService: AccountService) { }
 
   ngOnInit() {
     console.log();

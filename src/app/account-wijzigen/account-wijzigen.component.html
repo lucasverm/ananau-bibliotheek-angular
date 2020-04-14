@@ -1,48 +1,43 @@
 <ng-container *ngIf="!loading; else loadingError">
   <div class="row">
     <app-sidemenu class="col-12 col-md-2"></app-sidemenu>
-    <div class="col-10">
-      <div class="row">
+    <div class="col-12 col-md-10 offset-lg-1 col-lg-8">
+      <h1 class="text-center">Account Wijzigen</h1>
+      <form [formGroup]="accountWijzigenFormulier" class="row" (ngSubmit)='accountWijzigen()'>
         <div class="col-12">
-          <h1 class="text-center">Account Wijzigen</h1>
-          <div class="row">
-            <div class="offset-2 col-8">
-              <div class="alert alert-success" role="alert" [hidden]="successMessage == null">
-                {{successMessage}}
-              </div>
-              <div class="alert alert-danger" role="alert" [hidden]="errorMessage == null">
-                {{errorMessage}}
-              </div>
-            </div>
+          <div class="alert alert-success" role="alert" [hidden]="successMessage == null">
+            {{successMessage}}
           </div>
-          <form [formGroup]="accountWijzigenFormulier" class="row" (ngSubmit)='accountWijzigen()'>
-            <div class="col-4">
-              <label for="voornaam" class="marginTop10">Voornaam</label>
-              <input type="text" class="form-control" id="voornaam" formControlName="voornaam">
-            </div>
-            <div class="col-4">
-              <label for="achternaam" class="marginTop10">Achternaam</label>
-              <input type="text" class="form-control" id="achternaam" formControlName="achternaam">
-            </div>
-            <div class="col-4">
-              <label for="telefoon" class="marginTop10">Telefoonnummer</label>
-              <input type="tel" class="form-control" id="telefoon" formControlName="telefoon">
-            </div>
-            <div class="col-6">
-              <label for="email" class="marginTop10">Emailadres</label>
-              <input type="email" class="form-control" id="email" formControlName="email">
-            </div>
-            <div class="col-6">
-              <label for="geboorteDatum" class="marginTop10">Geboorte datum</label>
-              <input type="date" class="form-control" id="geboorteDatum" formControlName="geboorteDatum">
-            </div>
-            <div class="col-12">
-              <button type="submit" class="btn btn-primary offset-3 col-6 marginTop10"
-                [disabled]='!accountWijzigenFormulier.valid'>Account aanpassen!</button>
-            </div>
-          </form>
+          <div class="alert alert-danger" role="alert" [hidden]="errorMessage == null">
+            {{errorMessage}}
+          </div>
         </div>
-      </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <label for="voornaam" class="marginTop10">Voornaam</label>
+          <input type="text" class="form-control" id="voornaam" formControlName="voornaam">
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <label for="achternaam" class="marginTop10">Achternaam</label>
+          <input type="text" class="form-control" id="achternaam" formControlName="achternaam">
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <label for="telefoon" class="marginTop10">Telefoonnummer</label>
+          <input type="tel" class="form-control" id="telefoon" formControlName="telefoon">
+        </div>
+        <div class="col-12 col-sm-6">
+          <label for="geboorteDatum" class="marginTop10">Geboorte datum</label>
+          <input type="date" class="form-control" id="geboorteDatum" formControlName="geboorteDatum">
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="email" class="marginTop10">Emailadres</label>
+          <input type="email" class="form-control" id="email" formControlName="email">
+        </div>
+        <div class="col-12 text-center">
+          <button type="submit" class="btn btn-primary marginTop10 width100OnlyMobile"
+            [disabled]='!accountWijzigenFormulier.valid'>Account
+            aanpassen!</button>
+        </div>
+      </form>
     </div>
   </div>
 </ng-container>

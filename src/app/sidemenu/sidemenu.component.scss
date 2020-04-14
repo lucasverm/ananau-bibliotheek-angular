@@ -6,6 +6,8 @@ div {
     text-align: center;
     padding: 10px 0px !important;
     border-bottom: 1px solid white;
+    text-align: left;
+    padding-left: 15px !important;
 
     &:first-child {
       border-top: 1px solid white;
@@ -13,7 +15,7 @@ div {
 
     &:hover {
       background-color: #ffd52d !important;
-      color: black;
+      color: #1e414e;
     }
 
     &:active {
@@ -44,6 +46,9 @@ div {
       border-top: 1px solid white !important;
       border-bottom: none !important;
       border-left: 1px solid white !important;
+      text-align: center;
+      padding-left: 0px !important;
+
       &:first-child {
         border-top: none white;
         border-left: none !important;
@@ -58,6 +63,8 @@ div {
       border-top: none !important;
       border-bottom: 1px solid white !important;
       border-left: none !important;
+      text-align: left;
+      padding-left: 15px !important;
 
       &:first-child {
         border-top: 1px solid white !important;
