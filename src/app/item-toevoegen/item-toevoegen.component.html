@@ -3,55 +3,55 @@
   <app-sidemenu class="col-12 col-md-2"></app-sidemenu>
   <div class="col-12 col-md-10">
     <form [formGroup]="itemToevoegenFormulier" (ngSubmit)='itemToevoegen()'>
-    <div class="row">
-      <div class="col-12">
-        <h1>Item toevoegen</h1>
-      </div>
-      <div class="col-12">
-        <div class="alert alert-success" role="alert" [hidden]="successMessage == null">
-          {{successMessage}}
-        </div>
-        <div class="alert alert-danger" role="alert" [hidden]="errorMessage == null">
-          {{errorMessage}}
-        </div>
-      </div>
-      <div class="col-12"> 
-
       <div class="row">
-        <div class="col-12 col-sm-6 col-md-4 col-md-4">
-          <label for="naam" class="marginTop10">Naam:</label>
-          <input type="text" class="form-control" id="naam" formControlName="naam">
+        <div class="col-12 text-center">
+          <h1>Item toevoegen</h1>
         </div>
-        <div class="col-12 col-sm-6 col-md-4">
-          <label for="merk" class="marginTop10">Merk:</label>
-          <input type="text" class="form-control" id="merk" formControlName="merk">
+        <div class="col-12 col-lg-10 offset-lg-1">
+          <div class="alert alert-success" role="alert" [hidden]="successMessage == null">
+            {{successMessage}}
+          </div>
+          <div class="alert alert-danger" role="alert" [hidden]="errorMessage == null">
+            {{errorMessage}}
+          </div>
         </div>
-        <div class="col-12 col-sm-6 col-md-4">
-          <label for="materiaal" class="marginTop10">Materiaal:</label>
-          <input type="text" class="form-control" id="materiaal" formControlName="materiaal">
-        </div>
-        <div class="col-12 col-sm-6 col-md-4">
-          <label for="inhoud" class="marginTop10">Inhoud:</label>
-          <input type="text" class="form-control" id="inhoud" formControlName="inhoud">
-        </div>
-        <div class="col-12 col-sm-6 col-md-4">
-          <label for="aankoopDatum" class="marginTop10">Aankoop datum:</label>
-          <input type="date" class="form-control" id="aankoopDatum" formControlName="aankoopDatum">
-        </div>
-        <div class="col-12 col-sm-6 col-md-4">
-          <label for="categorie" class="marginTop10" >Categorie:</label>
-          <select class="form-control" id="categorie" formControlName="categorie">
-            <option *ngFor="let key of itemCategorieenSleutels" [value]="key">{{itemCategorieen[key]}}</option>
-          </select>
-        </div>
-        <div class="col-12">
-          <button type="submit" class="btn btn-primary marginTop10 width100"
-            [disabled]='!itemToevoegenFormulier.valid'>Item toevoegen!</button>
-        </div>
+        <div class="col-12  col-lg-10 offset-lg-1">
+
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-4 col-md-4">
+              <label for="naam" class="marginTop10">Naam:</label>
+              <input type="text" class="form-control" id="naam" formControlName="naam">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+              <label for="merk" class="marginTop10">Merk:</label>
+              <input type="text" class="form-control" id="merk" formControlName="merk">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+              <label for="materiaal" class="marginTop10">Materiaal:</label>
+              <input type="text" class="form-control" id="materiaal" formControlName="materiaal">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+              <label for="inhoud" class="marginTop10">Inhoud:</label>
+              <input type="text" class="form-control" id="inhoud" formControlName="inhoud">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+              <label for="aankoopDatum" class="marginTop10">Aankoop datum:</label>
+              <input type="date" class="form-control" id="aankoopDatum" formControlName="aankoopDatum">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+              <label for="categorie" class="marginTop10">Categorie:</label>
+              <select class="form-control" id="categorie" formControlName="categorie">
+                <option *ngFor="let key of itemCategorieenSleutels" [value]="key">{{itemCategorieen[key]}}</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary marginTop10 width100"
+                [disabled]='!itemToevoegenFormulier.valid'>Item toevoegen!</button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </form>
+    </form>
   </div>
 </div>
 
