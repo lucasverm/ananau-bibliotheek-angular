@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ItemService } from '../services/item.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Item } from '../models/item.model';
+import { ItemCategorie } from '../models/item-categorie.enum';
 
 @Component({
   selector: 'app-item-wijzigen',
@@ -14,6 +15,8 @@ export class ItemWijzigenComponent implements OnInit {
   public item: Item;
   public itemWijzigenFormulier: FormGroup;
   public errorMessage: string;
+  public itemCategorieen = ItemCategorie
+  public itemCategorieenSleutels = Object.keys(ItemCategorie)
 
   constructor(public router: Router, public route: ActivatedRoute, private fb: FormBuilder, private itemService: ItemService) {
     this.route.data.subscribe(data => {

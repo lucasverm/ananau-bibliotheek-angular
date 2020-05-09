@@ -14,7 +14,7 @@ export class ItemPageComponent implements OnInit {
   public vanafGebruikerItems: number = 0;
   public loading: Boolean;
   public successMessage: string = null;
-
+  public errorMessage: string = null;
   constructor(private router: Router, private route: ActivatedRoute) {
     this.route.data.subscribe(data => {
       this.item = data['item'];

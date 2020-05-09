@@ -24,6 +24,7 @@ export class OverviewComponent implements OnInit {
   public vanafHistoriek: number;
   public hoeveelheidHistoriek: number;
   public totaalHistoriek: number;
+  public errorMessage: string;
 
   constructor(private _ontleenService: OntleenService, private _accountService: AccountService) {
     this.vanafOntleendeItems = 0;

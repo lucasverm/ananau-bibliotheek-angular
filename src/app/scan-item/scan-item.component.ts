@@ -109,8 +109,8 @@ export class ScanItemComponent implements OnInit {
       this.succesMessage = null;
       return checkAvailabilityFn(control.value).pipe(
         catchError(error => {
-         // this.errorMessage = error.error;
-         document.getElementById("zoekVeld").style.cssText = "border: 1px solid red !important; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px red;";
+          // this.errorMessage = error.error;
+          document.getElementById("zoekVeld").style.cssText = "border: 1px solid red !important; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px red;";
           this.itemNamenAanHetInladen = false;
           return of(null);
         }),
