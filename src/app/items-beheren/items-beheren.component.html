@@ -10,51 +10,52 @@
     </div>
     <div class="card marginTop10">
       <div class="card-header">
-        <i class="fa fa-fw fa-globe"></i> <strong>Beheer Items</strong>
+        <i class="fa fa-fw fa-globe"></i> <strong> {{ 'beheerItems' | translate:user}}</strong>
         <a class="float-right btn btn-primary geleButton" [routerLink]="['/itemtoevoegen']" id="itemtoevoegen">
-          <i class="fa fa-fw fa-plus-circle"></i><span class="d-none d-sm-inline"> Item toevoegen</span></a>
+          <i class="fa fa-fw fa-plus-circle"></i><span class="d-none d-sm-inline">
+            {{ itemToevoegen | translate:user}}</span></a>
       </div>
       <div class="card-body">
         <div class="col-12">
-          <h5 class="card-title"><i class="fa fa-fw fa-search"></i> Vind item</h5>
+          <h5 class="card-title"><i class="fa fa-fw fa-search"></i> {{ 'vindItem'| translate:user}}</h5>
           <form [formGroup]="filterFormulier" (change)="filteren()">
             <div class="row align-bottom">
               <div class="col-12 col-sm-6 col-lg-3">
                 <div class="form-group">
-                  <label>Item naam:</label>
+                  <label>{{'itemNaam' | translate}}:</label>
                   <input type="text" name="itemNaam" id="itemNaam" formControlName="itemNaam"
-                    class="form-control width100" value="" placeholder="Geef item naam in">
+                    class="form-control width100" value="" placeholder="{{'geefItemNaamIn' | translate}}">
                 </div>
               </div>
               <div class="col-12 col-sm-6 col-lg-3">
                 <div class="form-group">
-                  <label>Beschikbaar:</label>
+                  <label>{{'beschikbaar' | translate}}:</label>
                   <select class="form-control" name="beschikbaar" formControlName="beschikbaar" id="beschikbaar">
-                    <option value="beiden" selected>Beiden</option>
-                    <option value="ja">Ja</option>
-                    <option value="nee">Neen</option>
+                    <option value="beiden" selected translate>Beiden</option>
+                    <option value="ja" translate>Ja</option>
+                    <option value="nee" translate>Neen</option>
                   </select>
                 </div>
               </div>
               <div class="col-12 col-sm-6 col-lg-3">
                 <div class="form-group">
-                  <label>Gearchiveerd:</label>
+                  <label>{{'gearchiveerd' | translate}}:</label>
                   <input type="checkbox" name="gearchiveerd" id="gearchiveerd" [checked]="gearchiveerd"
                     (change)="gearchiveerd = !gearchiveerd" class="form-control checkbox">
                 </div>
               </div>
               <div class="col-12 col-sm-6 col-lg-3">
                 <div class="form-group">
-                  <label>Categorie:</label>
+                  <label>{{'categorie' | translate}}:</label>
                   <select class="form-control" id="categorie" formControlName="categorie">
-                    <option value="-1" selected>Geen geselecteerd</option>
+                    <option value="-1" selected translate>Geen geselecteerd</option>
                     <option *ngFor="let key of itemCategorieenSleutels" [value]="key">{{itemCategorieen[key]}}</option>
                   </select>
                 </div>
               </div>
               <div class="col-12 col-sm-6 col-lg-3">
                 <div class="form-group">
-                  <label>Aantal items:</label>
+                  <label>{{'aantalItems'| translate}}:</label>
                   <select class="form-control" name="aantalItems" id="aantalItems"
                     (change)="aantalItemsVeranderen($event.target.value)">
                     <option value="25" selected>25</option>
@@ -80,14 +81,14 @@
         <tr>
           <th class="d-none d-lg-block d-xl-block">#</th>
           <th class="hoverUnderline">
-            <a (click)="sorteren('naam')">Naam
+            <a (click)="sorteren('naam')">{{'naam' | translate}}:
               <i *ngIf="naamSorteren == null" class="fas fa-sort"></i>
               <i *ngIf="naamSorteren != null && naamSorteren == 'asc'" class="fas fa-sort-down"></i>
               <i *ngIf="naamSorteren != null && naamSorteren == 'desc'" class="fas fa-sort-up"></i>
             </a>
           </th>
           <th class="hoverUnderline d-none d-sm-block  d-md-block d-lg-block d-xl-block">
-            <a (click)="sorteren('toegevoegdOp')">Toegevoegd op:
+            <a (click)="sorteren('toegevoegdOp')">{{'toegevoegdOp' | translate}}:
               <i *ngIf="toegevoegdOpSorteren == null" class="fas fa-sort"></i>
               <i *ngIf="toegevoegdOpSorteren != null && toegevoegdOpSorteren == 'asc'" class="fas fa-sort-down"></i>
               <i *ngIf="toegevoegdOpSorteren != null && toegevoegdOpSorteren == 'desc'" class="fas fa-sort-up"></i>
@@ -95,14 +96,14 @@
           </th>
           <th class="hoverUnderline" *ngIf="!gearchiveerd">
             <a (click)="sorteren('beschikbaar')"><span
-                class="d-none d-sm-inline d-md-inline d-lg-inline d-xl-inline">Beschikbaar
+                class="d-none d-sm-inline d-md-inline d-lg-inline d-xl-inline">{{'beschikbaar' | translate}}:
                 <i *ngIf="beschikbaarSorteren == null" class="fas fa-sort"></i>
                 <i *ngIf="beschikbaarSorteren != null && beschikbaarSorteren == 'asc'" class="fas fa-sort-down"></i>
                 <i *ngIf="beschikbaarSorteren != null && beschikbaarSorteren == 'desc'" class="fas fa-sort-up"></i>
               </span>
             </a>
           </th>
-          <th><span class="">Actions</span></th>
+          <th><span class="">{{'acties' |translate}}</span></th>
         </tr>
       </thead>
       <ng-container *ngIf="!loadingItems; else loadingItemsError">
@@ -120,21 +121,24 @@
             </td>
             <td *ngIf="!item.gearchiveerd">
               <a [routerLink]="['..', 'itemwijzigen', item.id]" class="btn btn-primary geleButton editButtons">
-                <i class="fas fa-edit yellow"></i><span class="d-none d-sm-inline d-md-inline  d-lg-inline d-xl-inline">
+                <i class="fas fa-edit yellow"></i><span class="d-none d-sm-inline d-md-inline  d-lg-inline d-xl-inline"
+                  translate>
                   Edit</span>
               </a>
               <a (click)="archiveringAanpassen(item)" class="btn btn-danger editButtons">
                 <i class="fas fa-archive roodIcon"></i>
-                <span class="d-none d-sm-inline d-md-inline d-lg-inline d-xl-inline"> Archiveer</span></a>
+                <span class="d-none d-sm-inline d-md-inline d-lg-inline d-xl-inline" translate>
+                  {{Archiveer | translate}}</span></a>
             </td>
             <td *ngIf="item.gearchiveerd">
               <a (click)="archiveringAanpassen(item)" class="btn btn-success editButtons">
                 <i class="fas fa-folder-open groenIcon"></i><span
-                  class="d-none d-sm-inline d-md-inline  d-lg-inline d-xl-inline">
+                  class="d-none d-sm-inline d-md-inline  d-lg-inline d-xl-inline" translate>
                   Zet terug</span>
               </a>
               <a (click)="verwijderItem(item)" class="btn btn-danger editButtons"><i class="fas fa-trash roodIcon"></i>
-                <span class="d-none d-sm-inline d-md-inline d-lg-inline d-xl-inline"> Delete</span></a>
+                <span class="d-none d-sm-inline d-md-inline d-lg-inline d-xl-inline" translate>
+                  {{Delete |translate:user}}</span></a>
             </td>
           </tr>
         </tbody>
@@ -147,14 +151,14 @@
       </div>
       <ul class="pagination ">
         <li class="page-item" [ngClass]="{'disabled': itemsVanaf <= 0}"><button (click)="veranderItemsScope(-1)"
-            class="page-link">Vorige</button></li>
+            class="page-link" translate>Vorige</button></li>
         <li class="page-item active"><a href="#" class="page-link">1</a></li>
         <li class="page-item"><a href="#" class="page-link">2</a></li>
         <li class="page-item"><a href="#" class="page-link">3</a></li>
         <li class="page-item"><a href="#" class="page-link">4</a></li>
         <li class="page-item"><a href="#" class="page-link">5</a></li>
         <li class="page-item" [ngClass]="{'disabled': totaalAantalItemsBeschikaar <= (itemsVanaf + aantalItems)}">
-          <button (click)="veranderItemsScope(1)" class="page-link">
+          <button (click)="veranderItemsScope(1)" class="page-link" translate>
             Volgende
           </button>
         </li>
@@ -168,7 +172,7 @@
   <div class="row">
     <div class="col-12 text-center">
       <div class="spinner-border spinner" role="status">
-        <span class="sr-only">Loading...</span>
+        <span class="sr-only" translate="">Loading...</span>
       </div>
     </div>
   </div>
@@ -178,7 +182,7 @@
   <tr>
     <td colspan="6" class="text-center">
       <div class="spinner-border spinner" role="status">
-        <span class="sr-only">Loading...</span>
+        <span class="sr-only" translate="">Loading...</span>
       </div>
     </td>
   </tr>

@@ -20,7 +20,7 @@ export class ItemWijzigenComponent implements OnInit {
 
   constructor(public router: Router, public route: ActivatedRoute, private fb: FormBuilder, private itemService: ItemService) {
     this.route.data.subscribe(data => {
-      this.item = data['item'];
+      this.item = data['item'];  
     });
   }
 
@@ -31,7 +31,7 @@ export class ItemWijzigenComponent implements OnInit {
       materiaal: [this.item.materiaal],
       categorie: [this.item.categorie],
       inhoud: [this.item.inhoud],
-      aankoopDatum: [this.item.aankoopDatum.toISOString().substring(0, 10)]
+      aankoopDatum: [this.item.aankoopDatum ? this.item.aankoopDatum.toISOString().substring(0, 10) : ""]
     })
   }
 

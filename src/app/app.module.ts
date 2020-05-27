@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -23,7 +23,14 @@ import { ItemsBeherenComponent } from './items-beheren/items-beheren.component';
 import { ItemToevoegenComponent } from './item-toevoegen/item-toevoegen.component';
 import { ItemWijzigenComponent } from './item-wijzigen/item-wijzigen.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TaalWijzigenComponent } from './taal-wijzigen/taal-wijzigen.component'
 
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +49,8 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     AccountWijzigenComponent,
     ItemsBeherenComponent,
     ItemToevoegenComponent,
-    ItemWijzigenComponent
+    ItemWijzigenComponent,
+    TaalWijzigenComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +58,14 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     ReactiveFormsModule,
     HttpClientModule,
     QRCodeModule,
-    ZXingScannerModule
+    ZXingScannerModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

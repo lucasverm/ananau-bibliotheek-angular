@@ -5,7 +5,7 @@
     <form [formGroup]="itemWijzigenFormulier" (ngSubmit)='itemWijzigen()'>
       <div class="row">
         <div class="col-12">
-          <h1>Item wijzigen</h1>
+          <h1>{{'itemWijzigen' | translate}}</h1>
         </div>
         <div class="col-12">
           <div class="alert alert-danger" role="alert" [hidden]="errorMessage == null">
@@ -16,34 +16,34 @@
 
           <div class="row">
             <div class="col-12 col-sm-6 col-md-4 col-md-4">
-              <label for="naam" class="marginTop10">Naam:</label>
+              <label for="naam" class="marginTop10">{{'naam' | translate}}:</label>
               <input type="text" class="form-control" id="naam" formControlName="naam">
             </div>
             <div class="col-12 col-sm-6 col-md-4">
-              <label for="merk" class="marginTop10">Merk:</label>
+              <label for="merk" class="marginTop10">{{'merk'| translate}}:</label>
               <input type="text" class="form-control" id="merk" formControlName="merk">
             </div>
             <div class="col-12 col-sm-6 col-md-4">
-              <label for="materiaal" class="marginTop10">Materiaal:</label>
+              <label for="materiaal" class="marginTop10">{{'materiaal' | translate}}:</label>
               <input type="text" class="form-control" id="materiaal" formControlName="materiaal">
             </div>
             <div class="col-12 col-sm-6 col-md-4">
-              <label for="inhoud" class="marginTop10">Inhoud:</label>
+              <label for="inhoud" class="marginTop10">{{'inhoud' | translate}}:</label>
               <input type="text" class="form-control" id="inhoud" formControlName="inhoud">
             </div>
             <div class="col-12 col-sm-6 col-md-4">
-              <label for="aankoopDatum" class="marginTop10">Aankoop datum:</label>
+              <label for="aankoopDatum" class="marginTop10">{{'aankoopDatum' | translate}}:</label>
               <input type="date" class="form-control" id="aankoopDatum" formControlName="aankoopDatum">
             </div>
             <div class="col-12 col-sm-6 col-md-4">
-              <label for="categorie" class="marginTop10">Categorie:</label>
+              <label for="categorie" class="marginTop10">{{'categorie' | translate}}:</label>
               <select class="form-control" id="categorie" formControlName="categorie">
                 <option *ngFor="let key of itemCategorieenSleutels" [value]="key">{{itemCategorieen[key]}}</option>
               </select>
             </div>
             <div class="col-12">
               <button type="submit" class="btn btn-primary marginTop10 width100"
-                [disabled]='!itemWijzigenFormulier.valid'>Item toevoegen!</button>
+                [disabled]='!itemWijzigenFormulier.valid'>{{'itemWijzigen' | translate}}!</button>
             </div>
           </div>
         </div>

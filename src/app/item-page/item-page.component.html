@@ -4,7 +4,8 @@
     <div class="col-12 col-md-10">
       <div class="card marginTop10">
         <div class="card-header">
-          <h3 class="d-inline"> <i class="fa fa-fw fa-book"></i><strong> Item: {{item.naam}}</strong></h3>
+          <h3 class="d-inline"> <i class="fa fa-fw fa-book"></i><strong> {{'item' | translate }}
+              {{item.naam}}</strong></h3>
         </div>
         <div class="card-body">
           <div class="col-12">
@@ -14,20 +15,20 @@
             <div class="alert alert-danger" role="alert" [hidden]="errorMessage == null">
               {{errorMessage}}
             </div>
-            <h5 class="card-title"><i class="fa fa-fw fa-search"></i> Items in uw bezit: </h5>
+            <h5 class="card-title"><i class='fa fa-fw fa-search'></i> {{'itemsInBezit' | translate}}: </h5>
             <div class="row align-bottom">
               <div class="col-12">
                 <app-item-info [item]=item></app-item-info>
               </div>
             </div>
-            <h5 class="card-title"><i class="fa fa-fw fa-search"></i> Dit item werd ontleend door: </h5>
+            <h5 class="card-title"><i class='fa fa-fw fa-search'></i> {{'itemOntleendDoor' | translate}}: </h5>
             <div class="row align-bottom">
               <div class="col-12">
                 <button *ngIf="item.gebruikerItems.length > 10" [disabled]="vanafGebruikerItems <= 0"
-                  (click)="veranderGebruikerItemsScope(-1)">Minder</button>
+                  (click)="veranderGebruikerItemsScope(-1)" translate>Minder</button>
                 <button *ngIf="item.gebruikerItems.length > 10"
                   [disabled]="item.gebruikerItems.length <= (vanafGebruikerItems + 10)"
-                  (click)="veranderGebruikerItemsScope(1)">Meer</button>
+                  (click)="veranderGebruikerItemsScope(1)" translate>Meer</button>
                 <app-gebruiker-items-tabel [items]=getGebruikerItems() [startNummer]=vanafGebruikerItems>
                 </app-gebruiker-items-tabel>
               </div>
@@ -43,7 +44,7 @@
   <div class="row">
     <div class="col-2 offset-5 text-center">
       <div class="spinner-border spinner" role="status">
-        <span class="sr-only">Loading...</span>
+        <span class="sr-only" translate>Loading...</span>
       </div>
     </div>
   </div>

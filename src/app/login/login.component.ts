@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder, FormArray, ValidationE
 import { Router } from '@angular/router';
 import { AccountService } from '../services/account.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -18,12 +19,11 @@ export class LoginComponent implements OnInit {
   public loading: Boolean;
   public loginFormulier: FormGroup;
 
-  constructor(public router: Router, private fb: FormBuilder, private accountService: AccountService) {
+
+  constructor(public router: Router, private fb: FormBuilder, private accountService: AccountService, public translate: TranslateService) {
     if (this.router.getCurrentNavigation().extras.state != undefined) {
       this.errorMessage = this.router.getCurrentNavigation().extras.state.errorMessage;
     }
-
-    
   }
 
   ngOnInit() {
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
           this.errorMessage = `${err.error} `;
         } else if (err.status == 0) {
           this.errorMessage = `Onbekende error: probeer het later opnieuw!`;
-        }else if (err.error instanceof ProgressEvent) {
+        } else if (err.error instanceof ProgressEvent) {
           this.errorMessage = `${err.statusText} `;
         } else {
           this.errorMessage = `${err.error} `;

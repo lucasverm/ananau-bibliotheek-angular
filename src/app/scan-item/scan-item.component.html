@@ -2,7 +2,7 @@
   <div class="row">
     <app-sidemenu class="col-12 col-md-2"></app-sidemenu>
     <div class="col-12 col-md-10">
-      <h1>Scan een item: </h1>
+      <h1 translate>scanItemIn</h1>
       <div class="alert alert-danger" role="alert" [hidden]="errorMessage == null">
         {{ errorMessage }}
       </div>
@@ -15,7 +15,7 @@
         </div>
         <div class="col-12 col-md-5">
           <form [formGroup]="scanFormulier">
-            <label id="id">Geef een naam in: </label>
+            <label id="id">{{'geefNaamIn' | translate}}</label>
             <input formControlName="naam" type="text" id="zoekVeld" class="form-control" />
           </form>
           <table class="table" *ngIf="!itemNamenAanHetInladen && geselecteerdItem ==null">
@@ -27,12 +27,14 @@
           </table>
           <div *ngIf="itemNamenAanHetInladen">
             <div class="spinner-border spinner" role="status">
-              <span class="sr-only">Loading...</span>
+              <span class="sr-only" translate>Loading...</span>
             </div>
           </div>
 
-          <button *ngIf="geselecteerdItem !=null" (click)="scanItem()" type="submit"
-            class="btn btn-primary marginTop10 width100">{{geselecteerdItem.beschikbaar ? 'Onteen dit item!': 'Breng item terug!'}}</button>
+          <button *ngIf="geselecteerdItem !=null && geselecteerdItem.beschikbaar" (click)="scanItem()" type="submit"
+            class="btn btn-primary marginTop10 width100" tranlsate>{{'ontleenDitItem' | translate}}</button>
+          <button *ngIf="geselecteerdItem !=null && !geselecteerdItem.beschikbaar" (click)="scanItem()" type="submit"
+            class="btn btn-primary marginTop10 width100" tranlsate>{{'brengItemTerug' | translate}}</button>
           <app-item-info [item]=geselecteerdItem [itemAanHetLaden]=itemAanHetLaden></app-item-info>
         </div>
       </div>
@@ -44,7 +46,7 @@
   <div class="row">
     <div class="col-2 offset-5 text-center">
       <div class="spinner-border spinner" role="status">
-        <span class="sr-only">Loading...</span>
+        <span class="sr-only" translate>Loading...</span>
       </div>
     </div>
   </div>
