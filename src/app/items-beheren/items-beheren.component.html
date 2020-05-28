@@ -10,14 +10,14 @@
     </div>
     <div class="card marginTop10">
       <div class="card-header">
-        <i class="fa fa-fw fa-globe"></i> <strong> {{ 'beheerItems' | translate:user}}</strong>
+        <i class="fa fa-fw fa-globe"></i> <strong> {{ 'beheerItems' | translate}}</strong>
         <a class="float-right btn btn-primary geleButton" [routerLink]="['/itemtoevoegen']" id="itemtoevoegen">
           <i class="fa fa-fw fa-plus-circle"></i><span class="d-none d-sm-inline">
-            {{ itemToevoegen | translate:user}}</span></a>
+            {{ itemToevoegen | translate}}</span></a>
       </div>
       <div class="card-body">
         <div class="col-12">
-          <h5 class="card-title"><i class="fa fa-fw fa-search"></i> {{ 'vindItem'| translate:user}}</h5>
+          <h5 class="card-title"><i class="fa fa-fw fa-search"></i> {{ 'vindItem'| translate}}</h5>
           <form [formGroup]="filterFormulier" (change)="filteren()">
             <div class="row align-bottom">
               <div class="col-12 col-sm-6 col-lg-3">
@@ -48,7 +48,7 @@
                 <div class="form-group">
                   <label>{{'categorie' | translate}}:</label>
                   <select class="form-control" id="categorie" formControlName="categorie">
-                    <option value="-1" selected translate>Geen geselecteerd</option>
+                    <option value="-1" selected>{{'geenGeselecteerd' | translate}}</option>
                     <option *ngFor="let key of itemCategorieenSleutels" [value]="key">{{itemCategorieen[key]}}</option>
                   </select>
                 </div>
@@ -122,23 +122,22 @@
             <td *ngIf="!item.gearchiveerd">
               <a [routerLink]="['..', 'itemwijzigen', item.id]" class="btn btn-primary geleButton editButtons">
                 <i class="fas fa-edit yellow"></i><span class="d-none d-sm-inline d-md-inline  d-lg-inline d-xl-inline"
-                  translate>
-                  Edit</span>
+                  >{{'edit' | translate}}</span>
               </a>
               <a (click)="archiveringAanpassen(item)" class="btn btn-danger editButtons">
                 <i class="fas fa-archive roodIcon"></i>
-                <span class="d-none d-sm-inline d-md-inline d-lg-inline d-xl-inline" translate>
-                  {{Archiveer | translate}}</span></a>
+                <span class="d-none d-sm-inline d-md-inline d-lg-inline d-xl-inline">
+                  {{'archiveer' | translate}}</span></a>
             </td>
             <td *ngIf="item.gearchiveerd">
               <a (click)="archiveringAanpassen(item)" class="btn btn-success editButtons">
                 <i class="fas fa-folder-open groenIcon"></i><span
-                  class="d-none d-sm-inline d-md-inline  d-lg-inline d-xl-inline" translate>
-                  Zet terug</span>
+                  class="d-none d-sm-inline d-md-inline  d-lg-inline d-xl-inline">
+                  {{'zetTerug' | translate}}</span>
               </a>
               <a (click)="verwijderItem(item)" class="btn btn-danger editButtons"><i class="fas fa-trash roodIcon"></i>
-                <span class="d-none d-sm-inline d-md-inline d-lg-inline d-xl-inline" translate>
-                  {{Delete |translate:user}}</span></a>
+                <span class="d-none d-sm-inline d-md-inline d-lg-inline d-xl-inline">
+                  {{'delete' | translate}}</span></a>
             </td>
           </tr>
         </tbody>
@@ -151,15 +150,15 @@
       </div>
       <ul class="pagination ">
         <li class="page-item" [ngClass]="{'disabled': itemsVanaf <= 0}"><button (click)="veranderItemsScope(-1)"
-            class="page-link" translate>Vorige</button></li>
+            class="page-link">{{'vorige' | translate}}</button></li>
         <li class="page-item active"><a href="#" class="page-link">1</a></li>
         <li class="page-item"><a href="#" class="page-link">2</a></li>
         <li class="page-item"><a href="#" class="page-link">3</a></li>
         <li class="page-item"><a href="#" class="page-link">4</a></li>
         <li class="page-item"><a href="#" class="page-link">5</a></li>
         <li class="page-item" [ngClass]="{'disabled': totaalAantalItemsBeschikaar <= (itemsVanaf + aantalItems)}">
-          <button (click)="veranderItemsScope(1)" class="page-link" translate>
-            Volgende
+          <button (click)="veranderItemsScope(1)" class="page-link">
+            {{'volgende' | translate}}
           </button>
         </li>
       </ul>

@@ -25,10 +25,10 @@
             <div class="row align-bottom">
               <div class="col-12">
                 <button *ngIf="item.gebruikerItems.length > 10" [disabled]="vanafGebruikerItems <= 0"
-                  (click)="veranderGebruikerItemsScope(-1)" translate>Minder</button>
+                  (click)="veranderGebruikerItemsScope(-1)">{{'minder' | translate}}</button>
                 <button *ngIf="item.gebruikerItems.length > 10"
                   [disabled]="item.gebruikerItems.length <= (vanafGebruikerItems + 10)"
-                  (click)="veranderGebruikerItemsScope(1)" translate>Meer</button>
+                  (click)="veranderGebruikerItemsScope(1)">{{'meer' | translate}}</button>
                 <app-gebruiker-items-tabel [items]=getGebruikerItems() [startNummer]=vanafGebruikerItems>
                 </app-gebruiker-items-tabel>
               </div>

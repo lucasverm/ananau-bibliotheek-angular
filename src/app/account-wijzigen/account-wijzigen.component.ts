@@ -6,6 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Gebruiker } from '../models/gebruiker.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-account-wijzigen',
@@ -20,7 +21,7 @@ export class AccountWijzigenComponent implements OnInit {
   public gebruiker: Gebruiker;
   public successMessage: string = null;
 
-  constructor(public router: Router, private fb: FormBuilder, private accountService: AccountService) {
+  constructor(public router: Router, private fb: FormBuilder, private accountService: AccountService, public translate: TranslateService) {
     this.accountService.huidigeGebruiker.subscribe(value => {
       this.gebruiker = value;
     });
@@ -49,12 +50,14 @@ export class AccountWijzigenComponent implements OnInit {
         this.accountWijzigenFormulier.value.telefoon,
         this.accountWijzigenFormulier.value.email,
         this.accountWijzigenFormulier.value.geboorteDatum
-      )
+    )
+      
+    
       .subscribe(
         val => {
           this.loading = true;
           if (val) {
-            this.successMessage = "Wijzigingen toegepast!"
+            this.translate.get('wijzigingenToegepast').subscribe((text: string) => { this.successMessage = text });
             if (this.accountWijzigenFormulier.value.email != email) {
               this.accountService.logout();
             }
@@ -62,7 +65,7 @@ export class AccountWijzigenComponent implements OnInit {
           this.loading = false;
         },
         (err: HttpErrorResponse) => {
-          this.errorMessage = "Er liep iets fout, probeer het later opnieuw!"
+          this.translate.get('erLiepIetsFout').subscribe((text: string) => { this.errorMessage = text });
         }
       );
   }

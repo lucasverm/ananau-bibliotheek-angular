@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12 offset-md-3 col-md-6 offset-lg-4 col-lg-4 offset-xl-4 col-xl-3">
-    <h1 class="text-center" translate>login</h1>
+    <h1 class="text-center">{{'login' | translate}}</h1>
     <div class="alert alert-danger" role="alert" [hidden]="!((loginFormulier.get('email')['errors'] && loginFormulier.get('email').touched ) || 
     (loginFormulier.get('wachtwoord')['errors'] && loginFormulier.get('wachtwoord').touched) || errorMessage != null) 
     ">
@@ -17,11 +17,11 @@
       <form [formGroup]="loginFormulier" (ngSubmit)='logGebruikerIn()' class=" text-center">
 
         <input placeholder="{{'emailadres' | translate}}" type="email" class="form-control" id="email" formControlName="email">
-        <input placeholder="{{'Wachtwoord' | translate}}" type="password" class="form-control marginTop10" id="wachtwoord"
+        <input placeholder="{{'wachtwoord' | translate}}" type="password" class="form-control marginTop10" id="wachtwoord"
           formControlName="wachtwoord">
         <button type="submit" class="btn btn-primary col-12 marginTop10" [disabled]='!loginFormulier.valid'
-          translate>login</button>
-        <a class="linkText" [routerLink]="['/wachtwoordvergeten']" id="wachtwoodvergeten" translate>wwvergeten</a>
+        >{{'login' | translate}}</button>
+        <a class="linkText" [routerLink]="['/wachtwoordvergeten']" id="wachtwoodvergeten">{{'wwvergeten' | translate}}</a>
       </form>
     </ng-container>
   </div>

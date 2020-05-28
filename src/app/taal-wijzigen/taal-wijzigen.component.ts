@@ -19,8 +19,7 @@ export class TaalWijzigenComponent implements OnInit {
   }
 
   switchLanguage(language: string) {
-    console.log("test");
-    
+    localStorage.setItem("language", language);
     this.translate.use(language);
   }
 

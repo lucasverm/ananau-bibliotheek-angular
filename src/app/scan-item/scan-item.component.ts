@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject, Observable, of } from 'rxjs';
+import { Subject, Observable, of, throwError } from 'rxjs';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup, ValidatorFn, AbstractControl } from '@angular/forms';
@@ -11,6 +11,8 @@ import { Item } from '../models/item.model';
 import { OntleenService } from '../services/ontleen.service';
 import { GebruikerItem } from '../models/gebruiker-item.model';
 import { ClassGetter } from '@angular/compiler/src/output/output_ast';
+import { error } from 'util';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-scan-item',
@@ -31,7 +33,7 @@ export class ScanItemComponent implements OnInit {
   public itemAanHetLaden: Boolean = false;
   public scannerEnabled: Boolean = true;
 
-  constructor(public router: Router, private fb: FormBuilder, private ontleenService: OntleenService, private itemService: ItemService) { }
+  constructor(public router: Router, private fb: FormBuilder, private ontleenService: OntleenService, private itemService: ItemService, public translate: TranslateService) { }
 
   ngOnInit() {
     this.scanFormulier = this.fb.group({
@@ -47,9 +49,9 @@ export class ScanItemComponent implements OnInit {
         if (val) {
           var gebruikerItem = GebruikerItem.fromJSON(val);
           if (gebruikerItem.TerugOp == undefined) {
-            this.succesMessage = `Het item "${gebruikerItem.item.naam}" werd door jou ontleend op: ${this.formatDate(gebruikerItem.OntleendOp)}!`
+            this.succesMessage = this.translate.instant('itemOntleendOp', {naam: gebruikerItem.item.naam, datum:this.formatDate(gebruikerItem.OntleendOp)});
           } else {
-            this.succesMessage = `Het item "${gebruikerItem.item.naam}" werd door jou terug gebracht op: ${this.formatDate(gebruikerItem.TerugOp)}!`
+            this.succesMessage = this.translate.instant('itemTerugOp', {naam: gebruikerItem.item.naam, datum:this.formatDate(gebruikerItem.TerugOp)});
           }
           this.itemService.getItemById$(this.geselecteerdItem.id).subscribe(
             val => {
@@ -59,14 +61,14 @@ export class ScanItemComponent implements OnInit {
             },
             error => {
               console.log(error);
-              this.errorMessage = error.error;
+              this.errorMessage = this.translate.instant(error.error);
             }
           )
         }
       },
       error => {
         console.log(error);
-        this.errorMessage = error.error;
+        this.errorMessage = this.translate.instant(error.error);
       }
     );
   }
@@ -91,7 +93,7 @@ export class ScanItemComponent implements OnInit {
       },
       (error) => {
         console.log(error)
-        this.errorMessage = error.error;
+        this.errorMessage = this.translate.instant(`${error.error}`);
         this.itemNamenAanHetInladen = false;
       }
     );
@@ -112,14 +114,14 @@ export class ScanItemComponent implements OnInit {
           // this.errorMessage = error.error;
           document.getElementById("zoekVeld").style.cssText = "border: 1px solid red !important; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px red;";
           this.itemNamenAanHetInladen = false;
-          return of(null);
+          return throwError(error);;
         }),
         map((items: any[]) => {
           if (items) {
             items = items.map(Item.fromJSON)
             this.zoekResultaat = items;
             this.itemNamenAanHetInladen = false;
-            return of(null);
+            return throwError(error);;
           }
         })
       );

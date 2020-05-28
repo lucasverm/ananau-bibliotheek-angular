@@ -5,6 +5,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ItemCategorie } from '../models/item-categorie.enum';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-items-beheren',
@@ -31,7 +32,7 @@ export class ItemsBeherenComponent implements OnInit {
   public itemCategorieenSleutels = Object.keys(ItemCategorie)
   public categorieFilter: number = -1;
 
-  constructor(private itemService: ItemService, public router: Router, private fb: FormBuilder, ) { }
+  constructor(private itemService: ItemService, public router: Router, private fb: FormBuilder, public translate: TranslateService) { }
 
   ngOnInit() {
     this.filterFormulier = this.fb.group({
@@ -49,11 +50,13 @@ export class ItemsBeherenComponent implements OnInit {
       val => {
         if (val) {
           this.getItemMetFilterEnSorten();
-          this.successMessage = `Item "${item.naam}" werd verwijderd!`;
+          this.translate.get('itemXVerwijderd', { naam: item.naam }).subscribe((text: string) => {
+            this.successMessage = text;
+          });
         }
       },
       (error: HttpErrorResponse) => {
-        this.errorMessage = error.error;
+        this.errorMessage = this.translate.instant(`${error.error}`);
       }
     );
   }
@@ -68,16 +71,20 @@ export class ItemsBeherenComponent implements OnInit {
         if (val) {
           this.getItemMetFilterEnSorten();
           if (item.gearchiveerd) {
-            this.successMessage = `Item "${item.naam}" werd gearchiveerd!`;
+            this.translate.get('itemXWerdGearchiveerd', { naam: item.naam }).subscribe((text: string) => {
+              this.successMessage = text;
+            });
           } else {
-            this.successMessage = `Item "${item.naam}" werd terug gezet!`;
+            this.translate.get('itemXTerugGezet', { naam: item.naam }).subscribe((text: string) => {
+              this.successMessage = text;
+            });
           }
 
         }
       },
       (error: HttpErrorResponse) => {
-        console.log(error);
-        this.errorMessage = error.error;
+        this.errorMessage = this.translate.instant(`${error.error}`);
+        this.getItemMetFilterEnSorten();
       }
     );
 
@@ -153,8 +160,6 @@ export class ItemsBeherenComponent implements OnInit {
   }
 
   getItemMetFilterEnSorten() {
-    this.errorMessage = null;
-    this.successMessage = null;
     this.itemService.getItemsWithFilter$(
       this.itemsVanaf,
       this.aantalItems,
@@ -176,7 +181,7 @@ export class ItemsBeherenComponent implements OnInit {
           }
         },
         error => {
-          this.errorMessage = error.error;
+          this.errorMessage = this.translate.instant(`${error.error}`);
         }
       )
   }

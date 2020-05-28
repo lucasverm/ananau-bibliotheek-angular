@@ -5,6 +5,7 @@ import { AccountService } from '../services/account.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-registreer',
@@ -17,7 +18,7 @@ export class RegistreerComponent implements OnInit {
   public errorMessage: string;
   public loading: Boolean;
 
-  constructor(public router: Router, private fb: FormBuilder, private accountService: AccountService) { }
+  constructor(public router: Router, private fb: FormBuilder, private accountService: AccountService, public translate: TranslateService) { }
 
   ngOnInit() {
     this.registreerFormulier = this.fb.group({
@@ -61,13 +62,9 @@ export class RegistreerComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           if (err.error instanceof Error) {
-            this.errorMessage = `Error while trying to login user ${
-              this.registreerFormulier.value.email
-              }: ${err.error.message}`;
+            this.errorMessage = this.translate.instant('errorTijdensInloggen', {email: this.registreerFormulier.value.email, error:err.error.message});
           } else {
-            this.errorMessage = `Error ${err.status} while trying to login user ${
-              this.registreerFormulier.value.email
-              }: ${err.error}`;
+            this.errorMessage = this.translate.instant('errorTijdensInloggen', {email: this.registreerFormulier.value.email, error:err.status});
           }
         }
       );

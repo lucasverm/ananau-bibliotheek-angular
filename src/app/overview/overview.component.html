@@ -11,7 +11,7 @@
             <div class="alert alert-danger" role="alert" [hidden]="errorMessage == null">
               {{errorMessage}}
             </div>
-            <h5 class="card-title"><i class="fa fa-fw fa-search"></i> {{itemsInBezit | translate:user}}</h5>
+            <h5 class="card-title"><i class="fa fa-fw fa-search"></i> {{'itemsInBezit' | translate}}:</h5>
             <div class="row align-bottom">
               <div class="col-12">
                 <button *ngIf="totaalOntleendeItems > 10" [disabled]="vanafOntleendeItems <= 0"
@@ -23,7 +23,7 @@
                 </app-uitgeleende-boeken-tabel>
               </div>
             </div>
-            <h5 class="card-title"><i class="fa fa-fw fa-search"></i> {{ontleenHistorie | translate:user}}: </h5>
+            <h5 class="card-title"><i class="fa fa-fw fa-search"></i> {{'ontleenHistorie' | translate}}: </h5>
             <div class="row align-bottom">
               <div class="col-12">
                 <button *ngIf="totaalHistoriek > 10" [disabled]="vanafHistoriek <= 0"

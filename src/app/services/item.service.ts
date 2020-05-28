@@ -1,26 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../models/item.model';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, of, Subject, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AccountService } from './account.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemService {
-  constructor(private router: Router, private accountService: AccountService, private http: HttpClient) { }
+  constructor(private router: Router, private accountService: AccountService, private http: HttpClient, public translate: TranslateService) { }
 
   getItemById$(id: string): Observable<Item> {
     return this.http.get(`${environment.apiUrl}/Item/byId/${id}`).pipe(
       catchError(error => {
         if (error.status == 401) {
           this.accountService.logout();
-          this.router.navigate([`/login`], { state: { errorMessage: 'Uw login token is verstreken: log je opnieuw in!' } })
+          this.translate.get('tokenVerstreken').subscribe((text: string) => { this.router.navigate([`/login`], { state: { errorMessage: text } }) });;
+
         }
-        return of(null);
+        return throwError(error);;
       }),
       map((item: any): Item => {
         item = Item.fromJSON(item);
@@ -34,9 +36,9 @@ export class ItemService {
       catchError(error => {
         if (error.status == 401) {
           this.accountService.logout();
-          this.router.navigate([`/login`], { state: { errorMessage: 'Uw login token is verstreken: log je opnieuw in!' } })
+          this.translate.get('tokenVerstreken').subscribe((text: string) => { this.router.navigate([`/login`], { state: { errorMessage: text } }) });;
         }
-        return of(null);
+        return throwError(error);;
       }),
       map((item: any): Item => {
         return Item.fromJSON(item);
@@ -49,9 +51,9 @@ export class ItemService {
       catchError(error => {
         if (error.status == 401) {
           this.accountService.logout();
-          this.router.navigate([`/login`], { state: { errorMessage: 'Uw login token is verstreken: log je opnieuw in!' } })
+          this.translate.get('tokenVerstreken').subscribe((text: string) => { this.router.navigate([`/login`], { state: { errorMessage: text } }) });
         }
-        return of(null);
+        return throwError(error);;
       }),
       map((item: any): Item => {
         item = Item.fromJSON(item);
@@ -67,9 +69,9 @@ export class ItemService {
         catchError(error => {
           if (error.status == 401) {
             this.accountService.logout();
-            this.router.navigate([`/login`], { state: { errorMessage: 'Uw login token is verstreken: log je opnieuw in!' } })
+            this.translate.get('tokenVerstreken').subscribe((text: string) => { this.router.navigate([`/login`], { state: { errorMessage: text } }) });
           }
-          return of(null);
+          return throwError(error);;
         }),
         map((item: any): Item => {
           item = Item.fromJSON(item);
@@ -89,9 +91,9 @@ export class ItemService {
         catchError(error => {
           if (error.status == 401) {
             this.accountService.logout();
-            this.router.navigate([`/login`], { state: { errorMessage: 'Uw login token is verstreken: log je opnieuw in!' } })
+            this.translate.get('tokenVerstreken').subscribe((text: string) => { this.router.navigate([`/login`], { state: { errorMessage: text } }) });
           }
-          return of(null);
+          return throwError(error);;
         }),
         map((item: any): Item => {
           item = Item.fromJSON(item);
@@ -137,9 +139,9 @@ export class ItemService {
         catchError(error => {
           if (error.status == 401) {
             this.accountService.logout();
-            this.router.navigate([`/login`], { state: { errorMessage: 'Uw login token is verstreken: log je opnieuw in!' } })
+            this.translate.get('tokenVerstreken').subscribe((text: string) => { this.router.navigate([`/login`], { state: { errorMessage: text } }) });
           }
-          return of(null);
+          return throwError(error);;
         }),
         map((json: any[]): any[] => {
           json["items"] = json["items"].map(Item.fromJSON);

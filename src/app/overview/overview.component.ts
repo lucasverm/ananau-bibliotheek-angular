@@ -5,6 +5,7 @@ import { Item } from '../models/item.model';
 import { GebruikerItem } from '../models/gebruiker-item.model';
 import { AccountService } from '../services/account.service';
 import { Gebruiker } from '../models/gebruiker.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-overview',
@@ -26,7 +27,7 @@ export class OverviewComponent implements OnInit {
   public totaalHistoriek: number;
   public errorMessage: string;
 
-  constructor(private _ontleenService: OntleenService, private _accountService: AccountService) {
+  constructor(private _ontleenService: OntleenService, private _accountService: AccountService, public translate: TranslateService) {
     this.vanafOntleendeItems = 0;
     this.hoeveelheidOntleendeItems = 10;
     this.geefOntleendeBoeken(this.vanafOntleendeItems, this.hoeveelheidOntleendeItems);
@@ -64,7 +65,7 @@ export class OverviewComponent implements OnInit {
           }
         },
         error => {
-          this.loadingError = error;
+          this.loadingError = this.translate.instant(`${error.error}`);
         }
       );
   }
@@ -81,7 +82,7 @@ export class OverviewComponent implements OnInit {
           }
         },
         error => {
-          this.loadingError = error;
+          this.loadingError = this.translate.instant(`${error.error}`);
         }
       );
   }

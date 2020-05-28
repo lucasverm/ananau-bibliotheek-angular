@@ -37,7 +37,9 @@ export class LoginComponent implements OnInit {
     this.loginCredential = this.loginFormulier.value.email
     this.password = this.loginFormulier.value.wachtwoord
     if (!this.loginCredential || !this.password) {
-      this.errorMessage = 'Gelieve een wachtwoord en/of gebruikersnaam in te vullen';
+      this.translate.get('allesInvullen').subscribe((text: string) => {
+        this.errorMessage = text;
+      });
       return;
     }
     this.accountService.login(this.loginCredential, this.password).subscribe(
@@ -58,13 +60,15 @@ export class LoginComponent implements OnInit {
       },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
-          this.errorMessage = `${err.error} `;
+          this.errorMessage = this.translate.instant(`${err.error}`);
         } else if (err.status == 0) {
-          this.errorMessage = `Onbekende error: probeer het later opnieuw!`;
+          this.translate.get('onbekendeError').subscribe((text: string) => {
+            this.errorMessage = text;
+          });
         } else if (err.error instanceof ProgressEvent) {
-          this.errorMessage = `${err.statusText} `;
+          this.errorMessage = this.translate.instant(`${err.statusText}`);
         } else {
-          this.errorMessage = `${err.error} `;
+          this.errorMessage = this.translate.instant(`${err.error}`);
         }
       }
     );
@@ -75,14 +79,15 @@ export class LoginComponent implements OnInit {
       return;
 
     } else if (errors.required) {
-      return veldNaam + ' is verplicht';
+      return this.translate.instant('xIsVelplicht', { naam: veldNaam });
 
     } else if (errors.minlength) {
-      return `needs at least ${errors.minlength.requiredLength} 
-      characters (got ${errors.minlength.actualLength})`;
+      return this.translate.instant('aantalKarakters', { minstens: errors.minlength.requiredLength, actueel: errors.minlength.actualLength });
+      return ``;
 
     } else if (errors.email) {
-      return `Dit is een ongeldig emailadres!`;
+      return this.translate.instant('ongeldigEmailadres');
+      return ``;
     }
   }
 }

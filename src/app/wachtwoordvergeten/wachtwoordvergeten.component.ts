@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { TranslateCompiler, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-wachtwoordvergeten',
@@ -10,7 +11,7 @@ export class WachtwoordvergetenComponent implements OnInit {
 
   public wachtwoordVergetenFormulier: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, public translate: TranslateService) { }
 
   ngOnInit() {
     this.wachtwoordVergetenFormulier = this.fb.group({
@@ -27,11 +28,11 @@ export class WachtwoordvergetenComponent implements OnInit {
       return;
 
     } else if (errors.required) {
-      return  'Geef een emailadres in!';
+      return this.translate.instant('xIsVelplicht', { naam: "email" });
     }
-      
+
     else if (errors.email) {
-      return `Dit is een ongeldig emailadres!`;
+      return this.translate.instant('ongeldigEmailadres');
     }
   }
 

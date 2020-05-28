@@ -5,6 +5,7 @@ import { ItemService } from '../services/item.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Item } from '../models/item.model';
 import { ItemCategorie } from '../models/item-categorie.enum';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-item-wijzigen',
@@ -18,7 +19,7 @@ export class ItemWijzigenComponent implements OnInit {
   public itemCategorieen = ItemCategorie
   public itemCategorieenSleutels = Object.keys(ItemCategorie)
 
-  constructor(public router: Router, public route: ActivatedRoute, private fb: FormBuilder, private itemService: ItemService) {
+  constructor(public router: Router, public route: ActivatedRoute, private fb: FormBuilder, private itemService: ItemService, public translate: TranslateService) {
     this.route.data.subscribe(data => {
       this.item = data['item'];  
     });
@@ -40,11 +41,13 @@ export class ItemWijzigenComponent implements OnInit {
     this.itemService.putItem$(this.item).subscribe(
       val => {
         if (val) {
-          this.router.navigate([`../item/${val.id}`],{ state: { successMessage: 'Item gewijzigd!' } });
+          this.translate.get('itemGewijzigd').subscribe((text: string) => { 
+            this.router.navigate([`../item/${val.id}`], { state: { successMessage: text } });
+           });
         }
       },
       (error: HttpErrorResponse) => {
-        this.errorMessage = error.error;
+        this.errorMessage = this.translate.instant(`${error.error}`);
       }
     );
 

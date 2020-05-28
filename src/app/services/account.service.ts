@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, of } from 'rxjs';
+import { Observable, BehaviorSubject, of, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Gebruiker } from '../models/gebruiker.model';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +16,7 @@ export class AccountService {
     public huidigeGebruiker: Observable<Gebruiker>;
     public redirectUrl: string;
 
-    constructor(private http: HttpClient, private router: Router) {
+    constructor(private http: HttpClient, private router: Router, public translate: TranslateService) {
         let parsedToken = parseJwt(localStorage.getItem(this._tokenKey));
         if (parsedToken) {
             const expires =
@@ -101,9 +102,9 @@ export class AccountService {
                 catchError(error => {
                     if (error.status == 401) {
                         this.logout();
-                        this.router.navigate([`/login`], { state: { errorMessage: 'Uw login token is verstreken: log je opnieuw in!' } })
+                        this.translate.get('tokenVerstreken').subscribe((text: string) => { this.router.navigate([`/login`], { state: { errorMessage: text } }) });;
                     }
-                    return of(null);
+                    return throwError(error);;
                 }),
                 map((gebruiker: any) => {
                     if (gebruiker) {
