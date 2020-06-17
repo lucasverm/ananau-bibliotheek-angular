@@ -85,7 +85,12 @@ export class ItemService {
       {
         id: item.id,
         naam: item.naam,
-        gearchiveerd: item.gearchiveerd
+        gearchiveerd: item.gearchiveerd,
+        merk: item.merk,
+        materiaal: item.materiaal,
+        inhoud: item.inhoud,
+        aankoopDatum: item.aankoopDatum,
+        categorie: item.categorie
       }, { responseType: 'json' })
       .pipe(
         catchError(error => {
